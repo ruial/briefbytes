@@ -87,6 +87,13 @@ theme_config:
     twitter: https://twitter.com/briefbytes
     linkedin: https://www.linkedin.com/in/ruial
     mail: mailto:ruial@outlook.com
+  favicon:
+    desktop:
+      url: /images/desktop.ico
+    android:
+      url: /images/android.png
+    apple:
+      url: /images/apple.png
   logo:
     enabled: false
 
