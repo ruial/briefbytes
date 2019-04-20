@@ -75,6 +75,21 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: cactus
 
+theme_config:
+  colorscheme: briefbytes
+  nav:
+    home: /
+    about: /about/
+    articles: /archives/
+    projects: https://github.com/ruial
+  social_links:
+    github: https://github.com/ruial
+    twitter: https://twitter.com/briefbytes
+    linkedin: https://www.linkedin.com/in/ruial
+    mail: mailto:ruial@outlook.com
+  logo:
+    enabled: false
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
