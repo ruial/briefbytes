@@ -22,7 +22,7 @@ Most static site generators are quite similar and even provide quick ways to mig
 
 To create this blog and run a development server I executed the following commands
 
-```
+```bash
 npm install hexo-cli -g
 hexo init briefbytes
 cd briefbytes
@@ -32,7 +32,7 @@ hexo server
 
 Posts are written in markdown. Additional [themes](https://hexo.io/themes/index.html) can be installed by cloning a theme from a repository to the **themes** folder:
 
-```
+```bash
 git clone https://github.com/probberechts/hexo-theme-cactus.git themes/cactus
 rm -rf themes/cactus/.git
 ```
@@ -43,11 +43,11 @@ After installing themes, they can be switched by editing the **theme** option in
 
 Some useful commands:
 
-```
+```bash
 # Add post
 hexo new "post name"
 # Add page
-hexo new page "about"
+hexo new page about
 # Generate static files
 hexo generate
 ```
@@ -56,4 +56,4 @@ Static web pages can be hosted for free in many places, within certain limits. I
 
 ## Conclusion
 
-Static site generators are gaining popularity because of the advantages they provide, specially for developers that are used to a Git workflow. An example of a big website using Hexo is the [Vue.js docs](https://github.com/vuejs/vuejs.org). For a modern web development archicecture based on client-side JavaScript, reusable APIs and prebuilt Markup, read about the [JAMstack](https://jamstack.org).
+Static site generators are gaining popularity because of the advantages they provide, specially for developers that are used to a Git workflow. An example of a big website using Hexo is the [Vue.js docs](https://github.com/vuejs/vuejs.org). For a modern web development architecture based on client-side JavaScript, reusable APIs and prebuilt Markup, read about the [JAMstack](https://jamstack.org).
