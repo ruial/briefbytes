@@ -4,8 +4,6 @@ date: 2019-04-20 16:30:00
 tags: [hexo, netlify]
 ---
 
-# Hello World
-
 A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable.
 
 I will be using this blog to document my projects, research and share some notes that may also be helpful for other developers. Writing and publishing what I learn will also help me to improve my communication and writing skills.
