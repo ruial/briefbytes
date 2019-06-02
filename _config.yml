@@ -83,6 +83,7 @@ theme_config:
     about: /about/
     articles: /archives/
     projects: https://github.com/ruial
+    search: /search/
   social_links:
     github: https://github.com/ruial
     twitter: https://twitter.com/briefbytes

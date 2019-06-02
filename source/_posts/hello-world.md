@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2019-04-20 16:30:00
-tags: [hexo, netlify]
+tags: [jamstack, node.js]
 ---
 
 A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable.

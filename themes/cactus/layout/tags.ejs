@@ -1,6 +1,6 @@
 <% if (site.tags.length){ %>
   <h2><%= page.title %></h2>
-  <%- list_tags({show_count: false}) %>
+  <%- list_tags({show_count: true, orderby: 'count'}) %>
 <% } else { %>
   <h2><%= __('tag_cloud.zero') %></h2>
 <% } %>
