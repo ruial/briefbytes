@@ -13,7 +13,7 @@ timezone: UTC
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://briefbytes.com
 root: /
 permalink: :year/:title/
 permalink_defaults:
@@ -97,6 +97,13 @@ theme_config:
       url: /images/apple.png
   logo:
     enabled: false
+  rss: atom.xml
+  disqus:
+    enabled: true
+    shortname: briefbytes
+  google_analytics:
+    enabled: true
+    id: UA-141298250-1
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
