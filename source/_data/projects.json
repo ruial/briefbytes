@@ -1,0 +1,12 @@
+[
+  {
+     "name":"9GAG",
+     "url":"https://github.com/ruial/9gag",
+     "desc":"A Node.js module to download 9GAG posts and comments"
+  },
+  {
+    "name":"Remote Player",
+    "url":"https://github.com/ruial/RemotePlayer",
+    "desc":"Java server and Android client to control video players"
+ }
+]

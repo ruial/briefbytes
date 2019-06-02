@@ -101,4 +101,6 @@ theme_config:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/ruial/briefbytes
+  branch: gh-pages
