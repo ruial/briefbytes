@@ -121,6 +121,7 @@ body
 @import "_partial/pagination"
 @import "_partial/search"
 @import "_partial/tags"
+@import "_partial/tooltip"
 @import "_partial/categories"
 // Code
 @import "_highlight/" + $highlight
@@ -180,7 +181,21 @@ code
     &:after
       clear: both
 
+  &:hover 
+    .btn-copy
+      opacity: 1
+
+  .btn-copy
+    font-size: 1.2rem
+    position: absolute
+    right: 20px
+    opacity: 0
+    transition: opacity 0.2s ease-in
+    &:hover
+      color: $color-accent-1
+
   pre
+    margin: 0
     padding: 0
     border: none
     background: none
@@ -190,6 +205,7 @@ code
 
   td.gutter
     text-align: right
+    opacity: .2
 
   .line
     height: 22px

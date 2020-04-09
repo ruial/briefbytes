@@ -62,7 +62,7 @@ A responsive, clean and simple [Hexo](http://hexo.io) theme for a personal websi
     
 4. Run: `hexo generate` and `hexo server`
 
-5. [Publish your blog](https://hexo.io/docs/deployment)!
+5. [Publish your blog](https://hexo.io/docs/one-command-deployment.html)!
 
 
 ## Configuration
@@ -172,6 +172,16 @@ social_links:
 
 where `NAME` is the name of a [Font Awesome icon](https://fontawesome.com/icons?d=gallery&s=brands).
 
+### Copyright years
+
+By default, Cactus will use current year in your copyright year information.
+If there is a need to customize, please update `_config.yml`:
+
+```yml
+copyright:
+  start_year: 2016
+  end_year:
+```
 
 ### Language configuration
 
@@ -190,6 +200,7 @@ Currently, the theme is delivered with support for:
 - Persian (fa)
 - Russian (ru)
 - Spanish (es)
+- German (de)
 
 If you would like to use one the languages listed above, simply set `language`
 to the desired language (e.g., `fr`) in `_config.yml`.

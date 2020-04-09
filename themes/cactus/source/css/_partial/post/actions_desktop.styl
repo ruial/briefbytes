@@ -79,7 +79,7 @@
 
       a
         margin-right: 15px
-        color: color-accent-1
+        color: $color-accent-1
 
       a:hover
         underline(5px, $color-accent-1)
@@ -199,3 +199,9 @@
         float: left
         margin-right: 2rem
         font-style: italic
+
+@media print 
+  #header-post
+    display: none
+  #footer-post-container
+    display: none
