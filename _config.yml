@@ -84,9 +84,9 @@ theme_config:
     articles: /archives/
     projects: https://github.com/ruial
     search: /search/
+    RSS: /atom.xml
   social_links:
     github: https://github.com/ruial
-    twitter: https://twitter.com/briefbytes
     linkedin: https://www.linkedin.com/in/ruial
     mail: mailto:ruial@outlook.com
   favicon:
@@ -98,6 +98,8 @@ theme_config:
       url: /images/apple.png
   logo:
     enabled: false
+  posts_overview:
+    post_count: 10
   rss: atom.xml
   disqus:
     enabled: true
@@ -105,6 +107,9 @@ theme_config:
   google_analytics:
     enabled: true
     id: UA-141298250-1
+  copyright:
+    start_year:
+    end_year:
 
 asset_pipeline:
   revisioning:
