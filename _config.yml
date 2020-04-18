@@ -102,7 +102,7 @@ theme_config:
     post_count: 10
   rss: atom.xml
   disqus:
-    enabled: true
+    enabled: false
     shortname: briefbytes
   google_analytics:
     enabled: true
