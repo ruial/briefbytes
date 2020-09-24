@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="With an increasing number of specialized databases, each having their own query languages, data analysts have a hard time to combine data from multiples sources. To mitigate this issue, Facebook creat">
+<meta name="keywords" content="sql,mongodb,presto,metabase,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Query MongoDB using SQL with Presto">
+<meta property="og:url" content="https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/index.html">
+<meta property="og:site_name" content="BRIEF BYTES">
+<meta property="og:description" content="With an increasing number of specialized databases, each having their own query languages, data analysts have a hard time to combine data from multiples sources. To mitigate this issue, Facebook creat">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/metabase-setup.png">
+<meta property="og:image" content="https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/presto-ui.png">
+<meta property="og:image" content="https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/dashboard-example.png">
+<meta property="og:updated_time" content="2020-09-23T23:36:01.134Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Query MongoDB using SQL with Presto">
+<meta name="twitter:description" content="With an increasing number of specialized databases, each having their own query languages, data analysts have a hard time to combine data from multiples sources. To mitigate this issue, Facebook creat">
+<meta name="twitter:image" content="https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/metabase-setup.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/desktop.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
+          
+        
+    
+    
+    <title>Query MongoDB using SQL with Presto</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    
+    
+    
+      <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/Machine-learning-basics/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/Extracting-and-analysing-data-using-R/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none">Previous post</span>
+      <span id="i-next" class="info" style="display:none">Next post</span>
+      <span id="i-top" class="info" style="display:none">Back to top</span>
+      <span id="i-share" class="info" style="display:none">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&text=Query MongoDB using SQL with Presto"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&is_video=false&description=Query MongoDB using SQL with Presto"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Query MongoDB using SQL with Presto&body=Check out this article: https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&name=Query MongoDB using SQL with Presto&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&t=Query MongoDB using SQL with Presto"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Presto"><span class="toc-number">2.</span> <span class="toc-text">Presto</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Metabase"><span class="toc-number">3.</span> <span class="toc-text">Metabase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB"><span class="toc-number">4.</span> <span class="toc-text">MongoDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simulation"><span class="toc-number">5.</span> <span class="toc-text">Simulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Metabase-setup"><span class="toc-number">5.1.</span> <span class="toc-text">Metabase setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Presto-UI"><span class="toc-number">5.2.</span> <span class="toc-text">Presto UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dashboard"><span class="toc-number">5.3.</span> <span class="toc-text">Dashboard</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">6.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Query MongoDB using SQL with Presto
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">BRIEF BYTES</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-17T17:00:00.000Z" itemprop="datePublished">2019-11-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/docker/">docker</a>, <a class="tag-link" href="/tags/metabase/">metabase</a>, <a class="tag-link" href="/tags/mongodb/">mongodb</a>, <a class="tag-link" href="/tags/presto/">presto</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>With an increasing number of specialized databases, each having their own query languages, data analysts have a hard time to combine data from multiples sources. To mitigate this issue, Facebook created <a href="https://prestosql.io" target="_blank" rel="noopener">Presto</a>, a high performance, distributed SQL query engine for big data. I will be creating a small simulation using <a href="https://www.metabase.com" target="_blank" rel="noopener">Metabase</a>, a web based open-source BI solution to visualize data from <a href="https://www.mongodb.com" target="_blank" rel="noopener">MongoDB</a>.</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p><a href="https://www.docker.com" target="_blank" rel="noopener">Docker</a> is a container platform. Containers package software applications and all their dependencies, which helps enable reproducible infrastructure. <a href="https://hub.docker.com" target="_blank" rel="noopener">Docker Hub</a> contains many container images so we have a starting point and don’t have to package everything ourselves. This is extremely helpful, specially during development.</p>
+<p>Each container should only have one function. For example, a simple scenario when doing back-end development is to use a container for the application and another for the database. To connect the containers in a local environment, Docker Compose is the easiest solution but for production, the recommended approach is to use an orchestration system like <a href="https://kubernetes.io" target="_blank" rel="noopener">Kubernetes</a>.</p>
+<h2 id="Presto"><a href="#Presto" class="headerlink" title="Presto"></a>Presto</h2><p>Following the rise of NoSQL databases, many specialized query languages exist today. This leads to huge data integration efforts and expensive ETL processes. In the Hadoop world, a number of solutions emerged to enable the usage of SQL to retrieve data, Presto being the most interesting in my opinion.</p>
+<p>The main advantage of Presto is that it has many data connectors, such as Kafka, Cassandra, Elasticsearch, MongoDB, Postgres, etc… It is then able to infer the schema automatically and handle semi-structured data. Arrays, nested objects, multi-database joins and the regular SQL operations are all supported.</p>
+<p><a href="https://drill.apache.org" target="_blank" rel="noopener">Apache Drill</a> is a very similar alternative to Presto, however it appears to be less popular and doesn’t support as many data sources. Performance comparisons are out of the scope for this post, but Presto is used by big players in data-intensive environments. Amazon created <a href="https://aws.amazon.com/athena" target="_blank" rel="noopener">Athena</a> which is based on Presto and heavily integrated in AWS.</p>
+<h2 id="Metabase"><a href="#Metabase" class="headerlink" title="Metabase"></a>Metabase</h2><p>There is a lot of commercial Business Intelligence software out there. Metabase stands out for being an open-source BI technology that is easy to use even for people that don’t know SQL, allowing them to explore the data and create web dashboards. Some advanced visualizations still require SQL knowledge.</p>
+<p>Other alternatives include <a href="https://redash.io" target="_blank" rel="noopener">Redash</a> and <a href="https://superset.incubator.apache.org" target="_blank" rel="noopener">Superset</a>. From my research, these support more chart types but are less user friendly and deployment is a bit more complicated.</p>
+<h2 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h2><p>MongoDB is a document-oriented database. Documents are stored as JSON objects, making it a good choice for semi-structured data with a flexible schema. It does not support SQL out of the box, which makes it harder for analysts to extract data because they have to learn another query language.</p>
+<h2 id="Simulation"><a href="#Simulation" class="headerlink" title="Simulation"></a>Simulation</h2><p>I created 4 containers, 2 for different databases, 1 for Presto and the last for Metabase. Application data should be stored in volumes. Configuration files can either be copied and stored as part of the image or we can follow the volume approach. On Windows, named volumes must be used in some cases because of file permission issues.</p>
+<figure class="highlight yaml"><figcaption><span>docker-compose.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.4'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  mongo:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./mongo</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">mongo</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - mongo-data:</span><span class="string">/data/db</span></span><br><span class="line"><span class="attr">  postgres:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./postgres</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">postgres</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - postgres-data:</span><span class="string">/var/lib/postgresql/data</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">POSTGRES_PASSWORD=secret123</span></span><br><span class="line"><span class="attr">  presto:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./presto</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">presto</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"8080:8080"</span></span><br><span class="line"><span class="attr">  metabase:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">metabase/metabase:v0.33.4</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">metabase</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./data/metabase:/metabase-data</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"8000:3000"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">MB_DB_FILE=/metabase-data/metabase.db</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">  mongo-data:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">mongo-data</span></span><br><span class="line"><span class="attr">  postgres-data:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">postgres-data</span></span><br></pre></td></tr></table></figure>
+<p>I’m including here some commands that I used for testing. <a href="https://www.json-generator.com" target="_blank" rel="noopener">JSON Generator</a> is a very nice tool to create datasets. For more details about how to seed the databases and configure Presto, check the repository.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mongo bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># mongo</span></span><br><span class="line">mongo</span><br><span class="line"><span class="keyword">show</span> dbs</span><br><span class="line"><span class="keyword">use</span> testdb</span><br><span class="line"><span class="keyword">show</span> collections</span><br><span class="line">db.orders.count()</span><br><span class="line">db.users.find().limit(<span class="number">2</span>).pretty()</span><br><span class="line"></span><br><span class="line"><span class="comment"># postgres</span></span><br><span class="line">su postgres</span><br><span class="line">psql</span><br><span class="line">\l  <span class="comment"># list dbs</span></span><br><span class="line">\c locationdb <span class="comment"># connect to locationdb</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> information_schema.schemata; <span class="comment"># list all database schemas</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> pg_tables <span class="keyword">where</span> schemaname=<span class="string">'userlocation'</span>; <span class="comment"># list all tables from schema</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> userlocation.city;</span><br><span class="line"></span><br><span class="line"><span class="comment"># presto</span></span><br><span class="line">presto</span><br><span class="line"><span class="keyword">show</span> catalogs;</span><br><span class="line"><span class="keyword">show</span> schemas <span class="keyword">from</span> mongo;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span> <span class="keyword">from</span> mongo.testdb; </span><br><span class="line"><span class="keyword">describe</span> mongo.testdb.orders;</span><br><span class="line"></span><br><span class="line"><span class="comment"># select all orders, including the mongo _id</span></span><br><span class="line"><span class="keyword">select</span> _id, * <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">limit</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># number of orders</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> mongo.testdb.orders;</span><br><span class="line"></span><br><span class="line"><span class="comment"># number of items from a certain order</span></span><br><span class="line"><span class="keyword">select</span> cardinality(items) <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'s1'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># average number of items from shooping cart</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">avg</span>(cardinality(items)) <span class="keyword">from</span> mongo.testdb.orders;</span><br><span class="line"></span><br><span class="line"><span class="comment"># total number of items by user</span></span><br><span class="line"><span class="keyword">select</span> userId, <span class="keyword">sum</span>(cardinality(items)) n <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">group</span> <span class="keyword">by</span> userId <span class="keyword">order</span> <span class="keyword">by</span> -n;</span><br><span class="line"></span><br><span class="line"><span class="comment"># orders between 2 dates, for some reason have to add an OR condition for it to work correctly, maybe a bug?</span></span><br><span class="line"><span class="keyword">select</span> _id, <span class="keyword">id</span>, <span class="string">"when"</span>, <span class="keyword">year</span>(<span class="string">"when"</span>) y, <span class="keyword">month</span>(<span class="string">"when"</span>) m, <span class="keyword">day</span>(<span class="string">"when"</span>) d <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">where</span> _id <span class="keyword">is</span> <span class="literal">null</span> <span class="keyword">or</span> <span class="string">"when"</span> <span class="keyword">between</span> <span class="built_in">timestamp</span> <span class="string">'2019-10-28'</span> <span class="keyword">and</span> <span class="built_in">timestamp</span> <span class="string">'2019-11-02'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># unnest objects in arrays</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>, userId, <span class="string">"when"</span>, <span class="keyword">name</span>, price, quantity <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> <span class="keyword">UNNEST</span>(items) <span class="keyword">AS</span> t (<span class="keyword">name</span>, price, quantity) <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%sic%'</span> <span class="keyword">limit</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># total money spent by users</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(price * quantity) total <span class="keyword">from</span> mongo.testdb.orders <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> <span class="keyword">UNNEST</span>(items) <span class="keyword">AS</span> t (<span class="keyword">name</span>, price, quantity);</span><br><span class="line"></span><br><span class="line"><span class="comment"># select unique users that had orders and join info with other collection and table in other database</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span>(userId), <span class="keyword">name</span>, age, location, country <span class="keyword">from</span> mongo.testdb.orders o <span class="keyword">left</span> <span class="keyword">join</span> mongo.testdb.users u <span class="keyword">on</span> o.userId = u.id <span class="keyword">left</span> <span class="keyword">join</span> postgres.userlocation.city l <span class="keyword">on</span> u.location = l.city_name;</span><br><span class="line"></span><br><span class="line"><span class="comment"># location info for cities that have users - subqueries demo</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> postgres.userlocation.city <span class="keyword">where</span> city_name <span class="keyword">in</span> (<span class="keyword">select</span> location <span class="keyword">from</span> mongo.testdb.users);</span><br><span class="line"></span><br><span class="line"><span class="comment"># metabase - number of orders by month</span></span><br><span class="line"><span class="keyword">SELECT</span> date_trunc(<span class="string">'month'</span>, <span class="string">"testdb"</span>.<span class="string">"orders"</span>.<span class="string">"when"</span>) <span class="keyword">AS</span> <span class="string">"when"</span>, <span class="keyword">sum</span>(price * quantity) <span class="keyword">AS</span> <span class="string">"total"</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="string">"testdb"</span>.<span class="string">"orders"</span></span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> <span class="keyword">UNNEST</span>(items) <span class="keyword">AS</span> t (<span class="keyword">name</span>, price, quantity)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> date_trunc(<span class="string">'month'</span>, <span class="string">"testdb"</span>.<span class="string">"orders"</span>.<span class="string">"when"</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> date_trunc(<span class="string">'month'</span>, <span class="string">"testdb"</span>.<span class="string">"orders"</span>.<span class="string">"when"</span>) <span class="keyword">ASC</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># copy data from named volume to host</span></span><br><span class="line">docker run -v postgres-<span class="keyword">data</span>:/volumedata <span class="comment">--name test --rm -it alpine sh</span></span><br><span class="line">docker cp <span class="keyword">test</span>:/volumedata ./mydata</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop containers and remove a volume</span></span><br><span class="line">docker <span class="keyword">container</span> prune</span><br><span class="line">docker volume rm postgres-<span class="keyword">data</span></span><br></pre></td></tr></table></figure>
+<h3 id="Metabase-setup"><a href="#Metabase-setup" class="headerlink" title="Metabase setup"></a>Metabase setup</h3><p>Unlike the other tools, on Metabase there is no way to import/export dashboard configurations, other than copying the database it uses, which is H2 by default. For that reason I have included the data folder in the project repository.</p>
+<img src="/2019/Query-MongoDB-using-SQL-with-Presto/metabase-setup.png" title="Metabase setup">
+<h3 id="Presto-UI"><a href="#Presto-UI" class="headerlink" title="Presto UI"></a>Presto UI</h3><p>It is possible to see the queries that are executed by the Presto cluster. A distributed system is required to handle large amounts of data.</p>
+<img src="/2019/Query-MongoDB-using-SQL-with-Presto/presto-ui.png" title="Presto UI">
+<h3 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h3><p>This final dashboard can be obtained by navigating to <em>localhost:8000</em> after running <em>docker-compose up</em>. During the first manual setup I chose <em>test[at]example.com</em> as the username and <em>test1234</em> for the password. Ideally this should be a configuration of the image or automatically setup when the container starts.</p>
+<img src="/2019/Query-MongoDB-using-SQL-with-Presto/dashboard-example.png" title="Simulation dashboard">
+<h2 id="Closing-thoughts"><a href="#Closing-thoughts" class="headerlink" title="Closing thoughts"></a>Closing thoughts</h2><p>I recently had to create a web dashboard that needed data from multiple databases and these technologies allowed me to quickly build a quality prototype. Feel free to check the <a href="https://github.com/ruial/presto-simulation" target="_blank" rel="noopener">repository</a>.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display:none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display:none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Presto"><span class="toc-number">2.</span> <span class="toc-text">Presto</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Metabase"><span class="toc-number">3.</span> <span class="toc-text">Metabase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB"><span class="toc-number">4.</span> <span class="toc-text">MongoDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simulation"><span class="toc-number">5.</span> <span class="toc-text">Simulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Metabase-setup"><span class="toc-number">5.1.</span> <span class="toc-text">Metabase setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Presto-UI"><span class="toc-number">5.2.</span> <span class="toc-text">Presto UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dashboard"><span class="toc-number">5.3.</span> <span class="toc-text">Dashboard</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">6.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&text=Query MongoDB using SQL with Presto"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&is_video=false&description=Query MongoDB using SQL with Presto"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Query MongoDB using SQL with Presto&body=Check out this article: https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&title=Query MongoDB using SQL with Presto"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&name=Query MongoDB using SQL with Presto&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2019/Query-MongoDB-using-SQL-with-Presto/&t=Query MongoDB using SQL with Presto"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick='return $("#nav-footer").toggle(),!1'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick='return $("#toc-footer").toggle(),!1'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick='return $("#share-footer").toggle(),!1'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Rui Almeida
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script type="text/javascript">!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+
+
+
+
+
+</body>
+</html>

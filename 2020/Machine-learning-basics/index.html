@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The caret librar">
+<meta name="keywords" content="data,R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine learning basics">
+<meta property="og:url" content="https://briefbytes.com/2020/Machine-learning-basics/index.html">
+<meta property="og:site_name" content="BRIEF BYTES">
+<meta property="og:description" content="In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The caret librar">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/tree.png">
+<meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/titanic-data.png">
+<meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/correlation.png">
+<meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/clusters.png">
+<meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/wordcloud.png">
+<meta property="og:updated_time" content="2020-09-23T23:36:01.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine learning basics">
+<meta name="twitter:description" content="In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The caret librar">
+<meta name="twitter:image" content="https://briefbytes.com/2020/Machine-learning-basics/tree.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/desktop.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
+          
+        
+    
+    
+    <title>Machine learning basics</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    
+    
+    
+      <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/Avoid-web-scraping-detection/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none">Previous post</span>
+      <span id="i-next" class="info" style="display:none">Next post</span>
+      <span id="i-top" class="info" style="display:none">Back to top</span>
+      <span id="i-share" class="info" style="display:none">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Machine-learning-basics/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Machine-learning-basics/&text=Machine learning basics"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Machine-learning-basics/&is_video=false&description=Machine learning basics"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning basics&body=Check out this article: https://briefbytes.com/2020/Machine-learning-basics/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Machine-learning-basics/&name=Machine learning basics&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Machine-learning-basics/&t=Machine learning basics"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Machine-learning"><span class="toc-number">1.</span> <span class="toc-text">Machine learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classification"><span class="toc-number">2.</span> <span class="toc-text">Classification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regression"><span class="toc-number">3.</span> <span class="toc-text">Regression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NLP"><span class="toc-number">4.</span> <span class="toc-text">NLP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Machine learning basics
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">BRIEF BYTES</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-02-08T15:38:06.000Z" itemprop="datePublished">2020-02-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/R/">R</a>, <a class="tag-link" href="/tags/data/">data</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The <a href="https://topepo.github.io/caret/available-models.html" target="_blank" rel="noopener">caret</a> library in R makes it easy to test different machine learning algorithms.</p>
+<h2 id="Machine-learning"><a href="#Machine-learning" class="headerlink" title="Machine learning"></a>Machine learning</h2><p>Machine learning algorithms are able to learn from past data how to make predictions on new data. The most common types of ML algorithms are supervised or unsupervised.</p>
+<p>Supervised algorithms are used to solve classification (predict a class) and regression (predict continuous variable) problems. Training data contains labels and common metrics to evaluate models are accuracy, precision and recall for classification, or root mean square error (RMSE) and R-squared (R2) for regression. Prediction of time series can be made using other type of statistical models, like ARIMA and <a href="https://facebook.github.io/prophet" target="_blank" rel="noopener">prophet</a>.</p>
+<p>Unsupervised algorithms usually consist on dimensionality reduction (PCA, SVD, t-sne), clustering (hierarchical, k-means, DBSCAN), anomaly detection and a few others. These do not require training data, and there are different techniques to evaluate each algorithm.</p>
+<h2 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h2><p>The Titanic problem is a binary classification problem that consists on predicting the passengers who survived the disaster. Let’s take a look at the data.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; glimpse(titanic_train)</span><br><span class="line">Observations: 891</span><br><span class="line">Variables: 12</span><br><span class="line">$ PassengerId &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 2...</span><br><span class="line">$ Survived    &lt;int&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, ...</span><br><span class="line">$ Pclass      &lt;int&gt; 3, 1, 3, 1, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 2, 3, 2, 3, 3, 2, 2, 3, 1, 3, 3, 3, 1, 3, 3, 1, 1, ...</span><br><span class="line">$ Name        &lt;fct&gt; &quot;Braund, Mr. Owen Harris&quot;, &quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&quot;, &quot;Heikkinen, Mi...</span><br><span class="line">$ Sex         &lt;fct&gt; male, female, female, female, male, male, male, male, female, female, female, female, male, male...</span><br><span class="line">$ Age         &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55, 2, NA, 31, NA, 35, 34, 15, 28, 8, ...</span><br><span class="line">$ SibSp       &lt;int&gt; 1, 1, 0, 1, 0, 0, 0, 3, 0, 1, 1, 0, 0, 1, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 3, 1, 0, 3, 0, 0, 0, 1, ...</span><br><span class="line">$ Parch       &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 2, 0, 0, 0, 0, ...</span><br><span class="line">$ Ticket      &lt;fct&gt; A/5 21171, PC 17599, STON/O2. 3101282, 113803, 373450, 330877, 17463, 349909, 347742, 237736, PP...</span><br><span class="line">$ Fare        &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625, 21.0750, 11.1333, 30.0708, 16.7000, 2...</span><br><span class="line">$ Cabin       &lt;fct&gt; , C85, , C123, , , E46, , , , G6, C103, , , , , , , , , , D56, , A6, , , , C23 C25 C27, , , , B7...</span><br><span class="line">$ Embarked    &lt;fct&gt; S, C, S, S, S, Q, S, S, S, C, S, S, S, S, S, S, Q, S, S, C, S, S, Q, S, S, S, C, S, Q, S, C, C, ...</span><br></pre></td></tr></table></figure>
+<p>Feature engineering can be more important than the machine learning algorithms applied. Some features like Cabin contain too many missing values and should be dropped. Other features can be added, like the Title (Mr, Ms) from the name, or the Fsize (family size) taking into account the SibSp (siblings/spouses), Parch (parents/children) and Ticket (number of duplicate tickets). Any missing values in the observations must be imputed.</p>
+<p>As a baseline, since most people died, a naive algorithm could predict that all people died and would achieve 62% accuracy on the train set. A smarter baseline model would predict that all men died and women survived, which would result in 79% accuracy. A machine learning algorithm should recognize patterns in the data and have better accuracy. Cross-validation (CV) is useful to prevent models from overfitting (achieving high train accuracy but low test accuracy).</p>
+<p>I’ve tried logistic regression, random forest, gradient boosting, however the algorithm that achieved best results in Kaggle was a simple tree classifier with 83% CV accuracy and 80% accuracy in the test set. The smart baseline would result in 77% test accuracy, so a small improvement was made.</p>
+<img src="/2020/Machine-learning-basics/tree.png" title="Decision tree">
+<p>With this decision tree, the Title, Pclass, Fsize, Sex and Embarked are the features used to decide the fate of a passenger. A simple visualization of the train data shows hints on why this tree was made.</p>
+<img src="/2020/Machine-learning-basics/titanic-data.png" title="Titanic data">
+<p>The tree is very interpretable. It captures that on Pclass 3, big families die, as well as Misses who embarked on S. For Pclass 1 and 2 it predicts that children and women live.</p>
+<h2 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h2><p>For this problem the predicted variable, Price, is skewed to the right, so a log transformation is helpful to make the distribution more normal and improve the predictions. The train dataset contains 1460 observations and 81 variables, most of which are useless.</p>
+<p>A lot of feature engineering was done to improve the predictions. A few variables have missing values but can be imputed with related variables. Right skewed variables should be transformed using a log function. Encoding a few categorical values as ordinals and removing outliers also improves results. A correlation matrix can be helpful to select the most important features for models that are sensitive to multicollinearity, like linear regression.</p>
+<img src="/2020/Machine-learning-basics/correlation.png" title="Correlation matrix">
+<p>Lasso regression achieved 0.11183 CV RMSE and 0.11911 test RMSE. Elasticnet was close behind, while ridge/linear regression and gradient boosting were worst but still an improvement over a mean baseline.</p>
+<p>To improve results I used k-means clustering to create 2 clusters and train a lasso model for each cluster. With this approach, the cluster for each test observation had to be predicted. Performance improved to 0.11897 RMSE. I have seen this cluster and then predict approach in a MOOC I have completed on EDX called The Analytics Edge, which I do recommend as it was very practical, easy to follow, covered many topics and included many examples and exercises.</p>
+<img src="/2020/Machine-learning-basics/clusters.png" title="Clusters">
+<p>With a weighted combination of all models, a final 0.11765 RMSE was reached, which at the time was enough to be in the top 20%. To further improve results more feature engineering and hyperparameter tuning would be required.</p>
+<h2 id="NLP"><a href="#NLP" class="headerlink" title="NLP"></a>NLP</h2><p>For this natural language problem I have used the R <a href="https://quanteda.io" target="_blank" rel="noopener">quanteda</a> library, which contains many helpful methods for text mining. Besides statistical analysis, NLP techniques like stemming and lemmatization can be used. One of the most helpful ways to compare the most used words in tweets that have been labeled as disaster or not is to plot a wordcloud.</p>
+<img src="/2020/Machine-learning-basics/wordcloud.png" title="Wordcloud">
+<p>The data was not clean, there were duplicate tweets with different labels, so the best approach is to use the mode to select the right label. To try a ML algorithm, text must be transformed to tabular data, where each row is a tweet, or document, and each column is a word, or feature. For the feature value I had best results with the word count, but binary encoding or tf-idf are also valid choices. Additional features like number of URLs and # also improved model performance.</p>
+<p>Since the resulting matrix is sparse and has many dimensions, it is helpful to remove words/columns that rarely appear. Naive bayes and Linear SVM algorithms are often used for text classification because they are fast to train on high dimensional data and provide good results. For other algorithms to train faster, a dimensionality reduction algorithm is typically applied first. With SVM I was able to reach 83% CV accuracy and 80% test accuracy. Bigrams did not improve the model but ensembles probably could. Unsupervised techniques like <a href="https://nlp.stanford.edu/projects/glove" target="_blank" rel="noopener">GloVe</a> to create word embeddings are quite interesting.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>I am satisfied with the results obtained and was able to learn more about machine learning. I did not explain everything and did not include any code on this post, feel free to check the code on <a href="https://github.com/ruial/kaggle-problems" target="_blank" rel="noopener">github</a> which contains more comments.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display:none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display:none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Machine-learning"><span class="toc-number">1.</span> <span class="toc-text">Machine learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classification"><span class="toc-number">2.</span> <span class="toc-text">Classification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regression"><span class="toc-number">3.</span> <span class="toc-text">Regression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NLP"><span class="toc-number">4.</span> <span class="toc-text">NLP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Machine-learning-basics/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Machine-learning-basics/&text=Machine learning basics"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Machine-learning-basics/&is_video=false&description=Machine learning basics"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Machine learning basics&body=Check out this article: https://briefbytes.com/2020/Machine-learning-basics/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Machine-learning-basics/&title=Machine learning basics"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Machine-learning-basics/&name=Machine learning basics&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Machine-learning-basics/&t=Machine learning basics"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick='return $("#nav-footer").toggle(),!1'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick='return $("#toc-footer").toggle(),!1'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick='return $("#share-footer").toggle(),!1'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Rui Almeida
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script type="text/javascript">!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+
+
+
+
+
+</body>
+</html>

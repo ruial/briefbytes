@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable. I will be using this blog to docum">
+<meta name="keywords" content="node.js,jamstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="https://briefbytes.com/2019/Hello-world/index.html">
+<meta property="og:site_name" content="BRIEF BYTES">
+<meta property="og:description" content="A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable. I will be using this blog to docum">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-23T23:36:01.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello World">
+<meta name="twitter:description" content="A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable. I will be using this blog to docum">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/desktop.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
+          
+        
+    
+    
+    <title>Hello World</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    
+    
+    
+      <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/Debugging-mobile-apps-with-an-https-proxy/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none">Previous post</span>
+      <span id="i-next" class="info" style="display:none">Next post</span>
+      <span id="i-top" class="info" style="display:none">Back to top</span>
+      <span id="i-share" class="info" style="display:none">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2019/Hello-world/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2019/Hello-world/&text=Hello World"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2019/Hello-world/&is_video=false&description=Hello World"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hello World&body=Check out this article: https://briefbytes.com/2019/Hello-world/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2019/Hello-world/&name=Hello World&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2019/Hello-world/&t=Hello World"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Static-site-generators"><span class="toc-number">1.</span> <span class="toc-text">Static site generators</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">2.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Hello World
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">BRIEF BYTES</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-04-20T16:30:00.000Z" itemprop="datePublished">2019-04-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/jamstack/">jamstack</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>A blog can be a good personal knowledge management system. Countless bookmarks, notes and files that I stored over the years are not easily searchable and shareable.</p>
+<p>I will be using this blog to document my projects, research and share some notes that may also be helpful for other developers. Writing and publishing what I learn will also help me to improve my communication and writing skills.</p>
+<p>On this post I will cover how to setup a static website for free.</p>
+<h2 id="Static-site-generators"><a href="#Static-site-generators" class="headerlink" title="Static site generators"></a>Static site generators</h2><p>An easy way to create a blog is to use a CMS, such as Wordpress but static site generators are preferable for this kind of content. Since the pages are not retrieved dynamically from a database, it provides better performance, higher security and cheaper/easier scaling. Some popular static generators can be found <a href="https://www.staticgen.com" target="_blank" rel="noopener">here</a>.</p>
+<p>Most static site generators are quite similar and even provide quick ways to migrate between them. I was inclined towards <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> and <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> because they are fast and full-featured but ultimately went for Hexo as I am more familiar with the Node.js ecosystem and just wanted to get up and running asap.</p>
+<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>To create this blog and run a development server I executed the following commands</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init briefbytes</span><br><span class="line"><span class="built_in">cd</span> briefbytes</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>Posts are written in markdown. Additional <a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">themes</a> can be installed by cloning a theme from a repository to the <strong>themes</strong> folder:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/probberechts/hexo-theme-cactus.git themes/cactus</span><br><span class="line">rm -rf themes/cactus/.git</span><br></pre></td></tr></table></figure>
+<p>A recommended alternative is to fork the theme and add it as a git submodule to the project, so that modifications to the theme can be made while allowing easy synchronization with the original repository.</p>
+<p>After installing themes, they can be switched by editing the <strong>theme</strong> option in the file <strong>_config.yml</strong>. The <a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo docs</a> are very good and provide additional information.</p>
+<p>Some useful commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add post</span></span><br><span class="line">hexo new <span class="string">"post name"</span></span><br><span class="line"><span class="comment"># Add page</span></span><br><span class="line">hexo new page about</span><br><span class="line"><span class="comment"># Generate static files</span></span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p>Static web pages can be hosted for free in many places, within certain limits. I chose <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> for version control and <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a> for hosting. The whole process is very simple, create a github repository, push the local changes and setup Netlify through the web interface to handle continuous integration and deployment.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Static site generators are gaining popularity because of the advantages they provide, specially for developers that are used to a Git workflow. An example of a big website using Hexo is the <a href="https://github.com/vuejs/vuejs.org" target="_blank" rel="noopener">Vue.js docs</a>. For a modern web development architecture based on client-side JavaScript, reusable APIs and prebuilt Markup, read about the <a href="https://jamstack.org" target="_blank" rel="noopener">JAMstack</a>.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display:none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display:none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Static-site-generators"><span class="toc-number">1.</span> <span class="toc-text">Static site generators</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">2.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display:none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2019/Hello-world/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2019/Hello-world/&text=Hello World"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2019/Hello-world/&is_video=false&description=Hello World"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hello World&body=Check out this article: https://briefbytes.com/2019/Hello-world/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2019/Hello-world/&title=Hello World"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2019/Hello-world/&name=Hello World&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2019/Hello-world/&t=Hello World"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick='return $("#nav-footer").toggle(),!1'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick='return $("#toc-footer").toggle(),!1'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick='return $("#share-footer").toggle(),!1'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Rui Almeida
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script type="text/javascript">!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+
+
+
+
+
+</body>
+</html>
