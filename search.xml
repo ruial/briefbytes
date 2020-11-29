@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>Secure Prometheus with OIDC or LDAP</title>
+      <link href="/2020/Secure-Prometheus-with-OIDC-or-LDAP/"/>
+      <url>/2020/Secure-Prometheus-with-OIDC-or-LDAP/</url>
+      
+        <content type="html"><![CDATA[<p>When hosting applications for internal use, it is common to only allow connections from private networks. However, in addition to using a VPN, being able to authenticate and authorize users with a centralized identity system is often required for security reasons. I found two good alternatives that I will describe next, along with a monitoring use case.</p><h2 id="Prometheus-and-Grafana"><a href="#Prometheus-and-Grafana" class="headerlink" title="Prometheus and Grafana"></a>Prometheus and Grafana</h2><p><a href="https://prometheus.io" target="_blank" rel="noopener">Prometheus</a> is one of the most widely used systems for monitoring and alerting, while <a href="https://grafana.com" target="_blank" rel="noopener">Grafana</a> is very popular to create observability dashboards like this one:</p><img src="/2020/Secure-Prometheus-with-OIDC-or-LDAP/grafana.png" title="Grafana dashboard"><p>Although some applications like Grafana already have support for OAuth or LDAP authentication, others like Prometheus delegate this responsibility to other systems.</p><h2 id="Pomerium"><a href="#Pomerium" class="headerlink" title="Pomerium"></a>Pomerium</h2><p><a href="https://www.pomerium.com/docs" target="_blank" rel="noopener">Pomerium</a> is an identity-aware proxy developed in Go. It can be placed in front of internal services and integrate with identity providers using <a href="https://en.wikipedia.org/wiki/OpenID_Connect" target="_blank" rel="noopener">OpenID Connect</a>. Out of the box, it supports identity providers like Google, Github and standard compliant OIDC providers like <a href="https://github.com/panva/node-oidc-provider" target="_blank" rel="noopener">node-oidc-provider</a> or <a href="https://identityserver4.readthedocs.io/en/latest" target="_blank" rel="noopener">IdentityServer</a>. Here’s a comprehensive <a href="https://www.scottbrady91.com/OpenID-Connect/Getting-Started-with-oidc-provider" target="_blank" rel="noopener">guide</a> to setup a provider.</p><h2 id="Authelia"><a href="#Authelia" class="headerlink" title="Authelia"></a>Authelia</h2><p><a href="https://www.authelia.com/docs" target="_blank" rel="noopener">Authelia</a> is an authentication and authorization server written in Go. It requires integration with a reverse proxy, such as Nginx. Instead of OIDC, LDAP is supported so it can be integrated with Active Directory (AD). On my tests I’ve used a local users file and Nginx, as it was the simplest approach. I also had success with AD and HAProxy (with LUA plugins), following the official documentation.</p><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>Both auth technologies work quite well. It boils down to what you need to integrate with. Some additional features can be added on the reverse proxy or load balancer, like rate limiting or modifying request headers.</p><p>I’ve setup a <a href="https://github.com/ruial/monitoring-auth-demo" target="_blank" rel="noopener">demo project</a> to demonstrate their capabilities that uses the following architecture:</p><img src="/2020/Secure-Prometheus-with-OIDC-or-LDAP/auth.png" title="Auth flow"><p>Besides proxy mode, which passes all traffic through, Pomerium also supports Forward authentication, which causes the reverse proxy to call an endpoint to verify if the user is authorized. User information is then placed on request headers. Both technologies make use of cookie sessions and redirect the user to the login page when not authenticated. They also support <a href="https://redis.io" target="_blank" rel="noopener">Redis</a>, which is important to preserve sessions during restarts or if using multiple instances.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> oidc </tag>
+            
+            <tag> ldap </tag>
+            
+            <tag> prometheus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OpenVPN deployment with Terraform and Ansible</title>
       <link href="/2020/OpenVPN-deployment-with-Terraform-and-Ansible/"/>
       <url>/2020/OpenVPN-deployment-with-Terraform-and-Ansible/</url>
