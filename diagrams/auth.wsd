@@ -1,0 +1,27 @@
+@startuml auth
+skinparam monochrome true
+skinparam backgroundColor #F9F9F9
+
+actor User
+rectangle Nginx
+rectangle Authelia
+rectangle Service
+User .> Nginx
+Nginx .up.> Authelia : "  Forward auth (GET /api/verify)"
+Nginx .> Service
+
+actor User as User2
+rectangle Pomerium
+rectangle HAProxy
+rectangle Service as Service2
+User2 -[hidden]--> User
+User2 .> Pomerium
+Pomerium .> HAProxy
+HAProxy .> Service2
+
+note bottom of HAProxy
+Optional, for additional
+logic like setting custom
+headers or rate limiting
+end note
+@enduml
