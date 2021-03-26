@@ -58,7 +58,7 @@ No significant difference in grades between different specializations.
 
 ``` r
 summary(data$Pages)
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's
 ##   59.00   98.75  119.00  122.67  144.00  330.00      44
 ```
 
@@ -80,7 +80,7 @@ The number of words correlates with the number of pages as expected.
 
 {% asset_img "grades-words.png" "Compare grades and number of words" %}
 
-There is some difference in the distributions, but I would like more data as most works are graded between 14 and 16.
+There is some difference in the distributions, but I would like more data as most works are graded between 14 and 16. Update: these grades are actually final course grades, not the dissertation grades.
 
 ### Common keywords
 
