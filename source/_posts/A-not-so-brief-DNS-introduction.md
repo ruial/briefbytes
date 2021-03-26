@@ -64,7 +64,7 @@ When a query is received by a name server, in the case of the Windows DNS server
 
 5. Do iterative queries on the root name servers and follow referrals, if a forwarder is not set or fails (configurable)
 
-A fully qualified domain names (FQDN) always has a dot at the end to avoid issues with relative names (e.g.: www.briefbytes.com.). Here's one image from the [Microsoft docs](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/reviewing-dns-concepts), which explains name resolution very nicely:
+A fully qualified domain names (FQDN) always has a dot at the end to avoid issues with relative names (e.g.: `www.briefbytes.com.`). Here's one image from the [Microsoft docs](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/reviewing-dns-concepts), which explains name resolution very nicely:
 
 {% asset_img "dns.gif" "DNS resolution" %}
 
