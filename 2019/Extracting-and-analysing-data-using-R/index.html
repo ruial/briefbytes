@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://briefbytes.com/2019/Extracting-and-analysing-data-using-R/correlation-matrix.png">
 <meta property="og:image" content="https://briefbytes.com/2019/Extracting-and-analysing-data-using-R/grades-words.png">
 <meta property="og:image" content="https://briefbytes.com/2019/Extracting-and-analysing-data-using-R/wordcloud.png">
-<meta property="og:updated_time" content="2020-09-23T23:36:01.117Z">
+<meta property="og:updated_time" content="2021-03-26T18:42:56.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Extracting and analysing data using R">
 <meta name="twitter:description" content="To finish a Master’s degree, students have to write a dissertation. As I’m on that path and out of curiosity, I wanted to get some insights on the dissertations written on my university in the last ye">
@@ -175,14 +175,14 @@
 <h3 id="Grade-distribution-by-specialization"><a href="#Grade-distribution-by-specialization" class="headerlink" title="Grade distribution by specialization"></a>Grade distribution by specialization</h3><img src="/2019/Extracting-and-analysing-data-using-R/specializations-boxplots.png" title="Compare grades by specialization">
 <p>No significant difference in grades between different specializations.</p>
 <h3 id="Average-number-of-pages-by-specialization"><a href="#Average-number-of-pages-by-specialization" class="headerlink" title="Average number of pages by specialization"></a>Average number of pages by specialization</h3><img src="/2019/Extracting-and-analysing-data-using-R/pages-histogram.png" title="Number of pages distribution">
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">summary(data$Pages)</span><br><span class="line"><span class="comment">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's </span></span><br><span class="line"><span class="comment">##   59.00   98.75  119.00  122.67  144.00  330.00      44</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">summary(data$Pages)</span><br><span class="line"><span class="comment">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's</span></span><br><span class="line"><span class="comment">##   59.00   98.75  119.00  122.67  144.00  330.00      44</span></span><br></pre></td></tr></table></figure>
 <p>On average people write about 123 pages.</p>
 <h3 id="Advisors-with-most-students-and-grade-distributions-with-specializations"><a href="#Advisors-with-most-students-and-grade-distributions-with-specializations" class="headerlink" title="Advisors with most students and grade distributions with specializations"></a>Advisors with most students and grade distributions with specializations</h3><img src="/2019/Extracting-and-analysing-data-using-R/advisors.png" title="Advisors">
 <p>The advisors assist students from multiple specializations and grades are well distributed. A bit of jittering and transparency was used in this categorical scatter plot to aid in interpretation.</p>
 <h3 id="Correlation-matrix"><a href="#Correlation-matrix" class="headerlink" title="Correlation matrix"></a>Correlation matrix</h3><img src="/2019/Extracting-and-analysing-data-using-R/correlation-matrix.png" title="Correlation matrix">
 <p>The number of words correlates with the number of pages as expected.</p>
 <h3 id="Compare-grades-and-number-of-words"><a href="#Compare-grades-and-number-of-words" class="headerlink" title="Compare grades and number of words"></a>Compare grades and number of words</h3><img src="/2019/Extracting-and-analysing-data-using-R/grades-words.png" title="Compare grades and number of words">
-<p>There is some difference in the distributions, but I would like more data as most works are graded between 14 and 16.</p>
+<p>There is some difference in the distributions, but I would like more data as most works are graded between 14 and 16. Update: these grades are actually final course grades, not the dissertation grades.</p>
 <h3 id="Common-keywords"><a href="#Common-keywords" class="headerlink" title="Common keywords"></a>Common keywords</h3><img src="/2019/Extracting-and-analysing-data-using-R/wordcloud.png" title="Keywords">
 <p>Artificial intelligence, mobile systems and web development seem to be hot topics.</p>
 <h2 id="Closing-thoughts"><a href="#Closing-thoughts" class="headerlink" title="Closing thoughts"></a>Closing thoughts</h2><p><strong>R</strong> and <strong>tidyverse</strong> are very helpful tools for data visualization and exploration. I have recently gained an interest on distributed systems and machine learning, so for the latter I will be signing up on <a href="https://www.kaggle.com" target="_blank" rel="noopener">Kaggle</a> and learn some new things on my free time. The full analysis, which is mainly focused on creating different visualizations, is available on <a href="https://github.com/ruial/dissertations-eda" target="_blank" rel="noopener">Github</a>.</p>
@@ -251,7 +251,7 @@
     Copyright &copy;
     
     
-    2020
+    2021
     Rui Almeida
   </div>
   <div class="footer-right">
