@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="description" content="Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big">
-<meta name="keywords" content="javascript,node.js,scraping">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Avoid web scraping detection">
 <meta property="og:url" content="https://briefbytes.com/2020/Avoid-web-scraping-detection/index.html">
 <meta property="og:site_name" content="BRIEF BYTES">
 <meta property="og:description" content="Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-23T23:36:01.115Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-13T23:08:09.347Z">
+<meta property="article:author" content="Rui Almeida">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="node.js">
+<meta property="article:tag" content="scraping">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Avoid web scraping detection">
-<meta name="twitter:description" content="Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big">
     
     
         
@@ -39,17 +41,21 @@
     
     <title>Avoid web scraping detection</title>
     
-    <link rel="stylesheet" href="/css/style.css">
+    
+<link rel="stylesheet" href="/css/style.css">
+
     
     
-      <link rel="stylesheet" href="/css/rtl.css">
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
     
     
     
     
       <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -67,7 +73,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -95,17 +101,17 @@
     <br>
     <div id="share" style="display:none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&text=Avoid web scraping detection"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&is_video=false&description=Avoid web scraping detection"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&text=Avoid web scraping detection"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&is_video=false&description=Avoid web scraping detection"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Avoid web scraping detection&body=Check out this article: https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&name=Avoid web scraping detection&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/&t=Avoid web scraping detection"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&name=Avoid web scraping detection&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/&t=Avoid web scraping detection"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -145,7 +151,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>, <a class="tag-link" href="/tags/scraping/">scraping</a>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="/tags/node-js/" rel="tag">node.js</a>, <a class="tag-link-link" href="/tags/scraping/" rel="tag">scraping</a>
     </div>
 
 
@@ -155,12 +161,12 @@
 
   <div class="content" itemprop="articleBody">
     <p>Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big search engines to crawl their content. I will share my opinion about this subject and how some websites detect web scraping.</p>
-<h2 id="Motivation-for-web-scraping"><a href="#Motivation-for-web-scraping" class="headerlink" title="Motivation for web scraping"></a>Motivation for web scraping</h2><p>There are many legitimate reasons to scrape a website and I have a short story of mine. A few years ago, I really enjoyed watching memes from 9gag during my long train commute to university. Sadly, I had very low mobile data, so I created an automation to scrape a few pages of memes during the night and transfer them to my phone so I could watch them offline. I inspected their internal API and created a javascript client, which I open-sourced and shared with the community on <a href="https://www.npmjs.com/package/9gag" target="_blank" rel="noopener">NPM</a>. This small contribution is now a part of fun personal projects made by other people like a <a href="https://github.com/casassg/meme_puller" target="_blank" rel="noopener">machine learning classifier</a>, a <a href="https://github.com/NebulaEngineering/lab-cqrs-es" target="_blank" rel="noopener">CQRS and event sourcing lab</a>, a <a href="https://github.com/Sam-Ryan/Scylla" target="_blank" rel="noopener">discord bot</a>, an <a href="https://github.com/danylkaaa/ReservoirCodeInt20Test" target="_blank" rel="noopener">aggregator website</a> and others.</p>
+<h2 id="Motivation-for-web-scraping"><a href="#Motivation-for-web-scraping" class="headerlink" title="Motivation for web scraping"></a>Motivation for web scraping</h2><p>There are many legitimate reasons to scrape a website and I have a short story of mine. A few years ago, I really enjoyed watching memes from 9gag during my long train commute to university. Sadly, I had very low mobile data, so I created an automation to scrape a few pages of memes during the night and transfer them to my phone so I could watch them offline. I inspected their internal API and created a javascript client, which I open-sourced and shared with the community on <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/9gag">NPM</a>. This small contribution is now a part of fun personal projects made by other people like a <a target="_blank" rel="noopener" href="https://github.com/casassg/meme_puller">machine learning classifier</a>, a <a target="_blank" rel="noopener" href="https://github.com/NebulaEngineering/lab-cqrs-es">CQRS and event sourcing lab</a>, a <a target="_blank" rel="noopener" href="https://github.com/Sam-Ryan/Scylla">discord bot</a>, an <a target="_blank" rel="noopener" href="https://github.com/danylkaaa/ReservoirCodeInt20Test">aggregator website</a> and others.</p>
 <p>Scraping enables automation, giving more freedom to power users. Some platforms do not like this because we won’t see their ads, however most power users block ads anyway as they usually cripple web apps. Other reasons to scrape may not be very ethical. For example, there are many bots scraping the web in search for emails to send spam. Any website is free to block scraping in any way they want, after all they are the ones that choose how to reply to requests. Linkedin sued a company for scraping their public content, but the court did not give them reason. A website term of services page hidden somewhere with a lot of text that no one reads is not really legally enforceable.</p>
 <p>If websites provide a reasonable API, web scraping can be reduced. This way they can enforce limits on API clients, like the ammount of requests allowed per day, track how it is used and even make money by charging for additional API calls. Most web applications are already using internal APIs, they could be made public. Frequently, scrapers actually consume these internal APIs instead of parsing the whole website, which is more efficient for both sides.</p>
-<h2 id="How-web-scraping-works-and-evade-detection"><a href="#How-web-scraping-works-and-evade-detection" class="headerlink" title="How web scraping works and evade detection"></a>How web scraping works and evade detection</h2><p>A web application can be rendered on the server side or client side. When the content rendered on the server and sent to the browser, scraping is easier because only HTML has to be parsed. When rendering happens on client side, a javascript interpreter is required to render the content, so a simple HTTP client is not enough to scrape content, a browser emulator like <a href="https://github.com/puppeteer/puppeteer" target="_blank" rel="noopener">Puppeteer</a> must be used, which is more resource intensive. I recently had to update my old library to use Puppeteer to avoid a CAPTCHA check.</p>
-<p>It is ironic that Google created their empire on web scraping and are the ones to create solutions like CAPTCHA to prevent others from crawling. Some websites even include metadata to help Google scrap their content more accurately and easily, using <a href="https://json-ld.org" target="_blank" rel="noopener">JSON-LD</a> for SEO purposes. There are many other crawlers that behave nicely and have good intentions.</p>
-<p>So how is web scraping detected? Common methods include checking HTTP headers like the user agent, device fingerprinting with javascript and inspecting connection or behaviour patterns. The easiest solution to avoid being detected is to use Puppeteer with a <a href="https://www.npmjs.com/package/puppeteer-extra-plugin-stealth" target="_blank" rel="noopener">stealth extension</a>, which already takes some steps to avoid detection. In addition, navigation should look like a real user, with random time between requests and do not access URLs not visible to a user. A pool of servers with different IP addresses may be needed for mass scale crawling, however many companies can detect if the IP is from major cloud providers, so residential IPs are better.</p>
+<h2 id="How-web-scraping-works-and-evade-detection"><a href="#How-web-scraping-works-and-evade-detection" class="headerlink" title="How web scraping works and evade detection"></a>How web scraping works and evade detection</h2><p>A web application can be rendered on the server side or client side. When the content rendered on the server and sent to the browser, scraping is easier because only HTML has to be parsed. When rendering happens on client side, a javascript interpreter is required to render the content, so a simple HTTP client is not enough to scrape content, a browser emulator like <a target="_blank" rel="noopener" href="https://github.com/puppeteer/puppeteer">Puppeteer</a> must be used, which is more resource intensive. I recently had to update my old library to use Puppeteer to avoid a CAPTCHA check.</p>
+<p>It is ironic that Google created their empire on web scraping and are the ones to create solutions like CAPTCHA to prevent others from crawling. Some websites even include metadata to help Google scrap their content more accurately and easily, using <a target="_blank" rel="noopener" href="https://json-ld.org/">JSON-LD</a> for SEO purposes. There are many other crawlers that behave nicely and have good intentions.</p>
+<p>So how is web scraping detected? Common methods include checking HTTP headers like the user agent, device fingerprinting with javascript and inspecting connection or behaviour patterns. The easiest solution to avoid being detected is to use Puppeteer with a <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/puppeteer-extra-plugin-stealth">stealth extension</a>, which already takes some steps to avoid detection. In addition, navigation should look like a real user, with random time between requests and do not access URLs not visible to a user. A pool of servers with different IP addresses may be needed for mass scale crawling, however many companies can detect if the IP is from major cloud providers, so residential IPs are better.</p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Web scraping detection will always be a cat and mouse game and some ways of detecting this were presented. However, in the end, if information is publicly available, even a real human can act as a web scraper with or without web extensions to help automate the process.</p>
 
   </div>
@@ -181,7 +187,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -196,17 +202,17 @@
 
     <div id="share-footer" style="display:none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&text=Avoid web scraping detection"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&is_video=false&description=Avoid web scraping detection"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&text=Avoid web scraping detection"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&is_video=false&description=Avoid web scraping detection"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Avoid web scraping detection&body=Check out this article: https://briefbytes.com/2020/Avoid-web-scraping-detection/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&name=Avoid web scraping detection&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/&t=Avoid web scraping detection"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&title=Avoid web scraping detection"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Avoid-web-scraping-detection/&name=Avoid web scraping detection&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Avoid-web-scraping-detection/&t=Avoid web scraping detection"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -240,7 +246,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -253,41 +259,35 @@
 
     </div>
     
+
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
 <link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
+
     
+
 <script src="/lib/jquery/jquery.min.js"></script>
+
+
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 
 
-  <script src="/lib/clipboard/clipboard.min.js"></script>
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">$(function(){$(".highlight table").before('<span class="btn-copy tooltipped tooltipped-sw" aria-label="Copy to clipboard!"><i class="far fa-clone"></i></span>'),new ClipboardJS(".btn-copy",{text:function(e){return Array.from(e.nextElementSibling.querySelectorAll(".code")).reduce((e,t)=>e+t.innerText+"\n","")}}).on("success",function(e){e.trigger.setAttribute("aria-label","Copied!"),e.clearSelection()})})</script>
+
 
 <script src="/js/main.js"></script>
 
 
 
 
-    <script type="text/javascript">!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+    <script type="text/javascript">!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="//www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
 
 
 

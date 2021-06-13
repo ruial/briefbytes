@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="description" content="Inspired by iOS Shortcuts and Zapier, I searched for an open source solution to easily create automations through a web interface and found two projects, Node-RED and n8n. Node-REDAs Node-RED is more">
-<meta name="keywords" content="automation,javascript,node.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Automation with Node-RED">
 <meta property="og:url" content="https://briefbytes.com/2020/Automation-with-Node-RED/index.html">
 <meta property="og:site_name" content="BRIEF BYTES">
 <meta property="og:description" content="Inspired by iOS Shortcuts and Zapier, I searched for an open source solution to easily create automations through a web interface and found two projects, Node-RED and n8n. Node-REDAs Node-RED is more">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://briefbytes.com/2020/Automation-with-Node-RED/packt-flow.png">
 <meta property="og:image" content="https://briefbytes.com/2020/Automation-with-Node-RED/producthunt-flow.png">
-<meta property="og:updated_time" content="2020-09-23T23:36:01.114Z">
+<meta property="article:published_time" content="2020-08-04T22:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-13T23:08:09.347Z">
+<meta property="article:author" content="Rui Almeida">
+<meta property="article:tag" content="automation">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="node.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Automation with Node-RED">
-<meta name="twitter:description" content="Inspired by iOS Shortcuts and Zapier, I searched for an open source solution to easily create automations through a web interface and found two projects, Node-RED and n8n. Node-REDAs Node-RED is more">
 <meta name="twitter:image" content="https://briefbytes.com/2020/Automation-with-Node-RED/packt-flow.png">
     
     
@@ -42,17 +44,21 @@
     
     <title>Automation with Node-RED</title>
     
-    <link rel="stylesheet" href="/css/style.css">
+    
+<link rel="stylesheet" href="/css/style.css">
+
     
     
-      <link rel="stylesheet" href="/css/rtl.css">
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
     
     
     
     
       <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -70,7 +76,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -98,17 +104,17 @@
     <br>
     <div id="share" style="display:none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Automation-with-Node-RED/&text=Automation with Node-RED"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Automation-with-Node-RED/&is_video=false&description=Automation with Node-RED"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2020/Automation-with-Node-RED/&text=Automation with Node-RED"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Automation-with-Node-RED/&is_video=false&description=Automation with Node-RED"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Automation with Node-RED&body=Check out this article: https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Automation-with-Node-RED/&name=Automation with Node-RED&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Automation-with-Node-RED/&t=Automation with Node-RED"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Automation-with-Node-RED/&name=Automation with Node-RED&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Automation-with-Node-RED/&t=Automation with Node-RED"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -148,7 +154,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/automation/">automation</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>
+        <a class="tag-link-link" href="/tags/automation/" rel="tag">automation</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="/tags/node-js/" rel="tag">node.js</a>
     </div>
 
 
@@ -157,15 +163,18 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Inspired by <a href="https://apps.apple.com/us/app/shortcuts/id915249334" target="_blank" rel="noopener">iOS Shortcuts</a> and <a href="https://zapier.com" target="_blank" rel="noopener">Zapier</a>, I searched for an open source solution to easily create automations through a web interface and found two projects, <a href="https://nodered.org" target="_blank" rel="noopener">Node-RED</a> and <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a>.</p>
-<h2 id="Node-RED"><a href="#Node-RED" class="headerlink" title="Node-RED"></a>Node-RED</h2><p>As Node-RED is more low-level and mature than n8n, I picked it to create some integrations. It is a flow-based programming tool developed in Node.js and is part of the <a href="https://js.foundation" target="_blank" rel="noopener">JS foundation</a>. From the web browser, applications/flows are created by adding nodes and linking them together to send messages. Custom JavaScript code can be added in function nodes. The flows created are saved as JSON, which allows for easy sharing. To extend Node-RED, new nodes are developed by the community and published <a href="https://flows.nodered.org" target="_blank" rel="noopener">here</a>. I really appreciated their <a href="https://cookbook.nodered.org" target="_blank" rel="noopener">documentation</a> with common use cases. The fastest way to get started is using Docker Compose:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  nodered:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">nodered/node-red:1.1.2</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">nodered</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"1880:1880"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">TZ=Europe/Lisbon</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./nodered-data:/data</span></span><br></pre></td></tr></table></figure>
+    <p>Inspired by <a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/shortcuts/id915249334">iOS Shortcuts</a> and <a target="_blank" rel="noopener" href="https://zapier.com/">Zapier</a>, I searched for an open source solution to easily create automations through a web interface and found two projects, <a target="_blank" rel="noopener" href="https://nodered.org/">Node-RED</a> and <a target="_blank" rel="noopener" href="https://n8n.io/">n8n</a>.</p>
+<h2 id="Node-RED"><a href="#Node-RED" class="headerlink" title="Node-RED"></a>Node-RED</h2><p>As Node-RED is more low-level and mature than n8n, I picked it to create some integrations. It is a flow-based programming tool developed in Node.js and is part of the <a target="_blank" rel="noopener" href="https://js.foundation/">JS foundation</a>. From the web browser, applications/flows are created by adding nodes and linking them together to send messages. Custom JavaScript code can be added in function nodes. The flows created are saved as JSON, which allows for easy sharing. To extend Node-RED, new nodes are developed by the community and published <a target="_blank" rel="noopener" href="https://flows.nodered.org/">here</a>. I really appreciated their <a target="_blank" rel="noopener" href="https://cookbook.nodered.org/">documentation</a> with common use cases. The fastest way to get started is using Docker Compose:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nodered:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nodered/node-red:1.1.2</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nodered</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;1880:1880&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Europe/Lisbon</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nodered-data:/data</span></span><br></pre></td></tr></table></figure>
+
 <p>Node-RED can even be deployed on a Raspberry Pi. If exposing it to the internet make sure to enable authentication and adequate security mechanisms such as a firewall or a reverse proxy. I will briefly describe 2 useful flows created for testing purposes.</p>
-<h2 id="Example-flows"><a href="#Example-flows" class="headerlink" title="Example flows"></a>Example flows</h2><p>The first flow is triggered daily to get the title and description of the <a href="https://www.packtpub.com/packt/offers/free-learning" target="_blank" rel="noopener">Packt</a> daily free e-book through their API. Using the excellent Telegram <a href="https://core.telegram.org/bots" target="_blank" rel="noopener">Bot API</a>, a message is sent to a channel so I never forget to download a nice book.</p>
+<h2 id="Example-flows"><a href="#Example-flows" class="headerlink" title="Example flows"></a>Example flows</h2><p>The first flow is triggered daily to get the title and description of the <a target="_blank" rel="noopener" href="https://www.packtpub.com/packt/offers/free-learning">Packt</a> daily free e-book through their API. Using the excellent Telegram <a target="_blank" rel="noopener" href="https://core.telegram.org/bots">Bot API</a>, a message is sent to a channel so I never forget to download a nice book.</p>
 <img src="/2020/Automation-with-Node-RED/packt-flow.png" title="Packt flow">
-<p>The second flow exposes an API with the latest projects in <a href="https://www.producthunt.com" target="_blank" rel="noopener">Product Hunt</a>. Node-RED already has nodes to scrape HTML using selectors and a template engine to render responses, although some data transformations are required to produce the final JSON.</p>
+
+<p>The second flow exposes an API with the latest projects in <a target="_blank" rel="noopener" href="https://www.producthunt.com/">Product Hunt</a>. Node-RED already has nodes to scrape HTML using selectors and a template engine to render responses, although some data transformations are required to produce the final JSON.</p>
 <img src="/2020/Automation-with-Node-RED/producthunt-flow.png" title="Producthunt flow">
-<p>The flows were easy to create and topics like logging, using environment variables, web APIs and scraping were straightforward. To test them, import the code available in this <a href="https://gist.github.com/ruial/69dec3c00b991c3b75da16c16907f87d" target="_blank" rel="noopener">gist</a>.</p>
+
+<p>The flows were easy to create and topics like logging, using environment variables, web APIs and scraping were straightforward. To test them, import the code available in this <a target="_blank" rel="noopener" href="https://gist.github.com/ruial/69dec3c00b991c3b75da16c16907f87d">gist</a>.</p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Node-RED is a great tool to create small prototypes and personal automations, however I am still not convinced that low-code visual programming tools are fit for production environments due to edge cases and maintainability concerns.</p>
 
   </div>
@@ -186,7 +195,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -201,17 +210,17 @@
 
     <div id="share-footer" style="display:none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://briefbytes.com/2020/Automation-with-Node-RED/&text=Automation with Node-RED"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Automation-with-Node-RED/&is_video=false&description=Automation with Node-RED"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2020/Automation-with-Node-RED/&text=Automation with Node-RED"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2020/Automation-with-Node-RED/&is_video=false&description=Automation with Node-RED"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Automation with Node-RED&body=Check out this article: https://briefbytes.com/2020/Automation-with-Node-RED/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Automation-with-Node-RED/&name=Automation with Node-RED&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Automation-with-Node-RED/&t=Automation with Node-RED"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2020/Automation-with-Node-RED/&title=Automation with Node-RED"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2020/Automation-with-Node-RED/&name=Automation with Node-RED&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2020/Automation-with-Node-RED/&t=Automation with Node-RED"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -245,7 +254,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://github.com/ruial">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
          
           <li><a href="/search/">Search</a></li>
          
@@ -258,41 +267,35 @@
 
     </div>
     
+
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
 <link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
+
     
+
 <script src="/lib/jquery/jquery.min.js"></script>
+
+
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 
 
-  <script src="/lib/clipboard/clipboard.min.js"></script>
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">$(function(){$(".highlight table").before('<span class="btn-copy tooltipped tooltipped-sw" aria-label="Copy to clipboard!"><i class="far fa-clone"></i></span>'),new ClipboardJS(".btn-copy",{text:function(e){return Array.from(e.nextElementSibling.querySelectorAll(".code")).reduce((e,t)=>e+t.innerText+"\n","")}}).on("success",function(e){e.trigger.setAttribute("aria-label","Copied!"),e.clearSelection()})})</script>
+
 
 <script src="/js/main.js"></script>
 
 
 
 
-    <script type="text/javascript">!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="//www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+    <script type="text/javascript">!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="//www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
 
 
 
