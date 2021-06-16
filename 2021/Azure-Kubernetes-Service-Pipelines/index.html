@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="In the last months I have been working with Azure DevOps and completed the Devops Engineer certification from Microsoft. Recently I’ve also been learning Kubernetes and wanted to build an end to end p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Kubernetes Service Pipelines">
+<meta property="og:url" content="https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/index.html">
+<meta property="og:site_name" content="BRIEF BYTES">
+<meta property="og:description" content="In the last months I have been working with Azure DevOps and completed the Devops Engineer certification from Microsoft. Recently I’ve also been learning Kubernetes and wanted to build an end to end p">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/aks-env.png">
+<meta property="og:image" content="https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/go-pipeline-stages.png">
+<meta property="og:image" content="https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/aks-result.png">
+<meta property="article:published_time" content="2021-06-15T22:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-16T18:21:31.727Z">
+<meta property="article:author" content="Rui Almeida">
+<meta property="article:tag" content="cloud">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="devops">
+<meta property="article:tag" content="pipelines">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/aks-env.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/desktop.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
+          
+        
+    
+    
+    <title>Azure Kubernetes Service Pipelines</title>
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    
+    
+    
+      <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/A-not-so-brief-DNS-introduction/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none">Previous post</span>
+      <span id="i-next" class="info" style="display:none">Next post</span>
+      <span id="i-top" class="info" style="display:none">Back to top</span>
+      <span id="i-share" class="info" style="display:none">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display:none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&text=Azure Kubernetes Service Pipelines"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&is_video=false&description=Azure Kubernetes Service Pipelines"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Azure Kubernetes Service Pipelines&body=Check out this article: https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&name=Azure Kubernetes Service Pipelines&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&t=Azure Kubernetes Service Pipelines"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Azure-DevOps"><span class="toc-number">1.</span> <span class="toc-text">Azure DevOps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proof-of-concept"><span class="toc-number">3.</span> <span class="toc-text">Proof of concept</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Azure Kubernetes Service Pipelines
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">BRIEF BYTES</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-15T22:00:00.000Z" itemprop="datePublished">2021-06-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/cloud/" rel="tag">cloud</a>, <a class="tag-link-link" href="/tags/devops/" rel="tag">devops</a>, <a class="tag-link-link" href="/tags/kubernetes/" rel="tag">kubernetes</a>, <a class="tag-link-link" href="/tags/pipelines/" rel="tag">pipelines</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In the last months I have been working with <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/devops">Azure DevOps</a> and completed the <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/learn/certifications/devops-engineer">Devops Engineer certification</a> from Microsoft. Recently I’ve also been learning Kubernetes and wanted to build an end to end pipeline to deploy a sample Go application, with Ingress and TLS, to the managed <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/services/kubernetes-service">Azure Kubernetes Service (AKS)</a>. I will describe the steps I’ve taken and share the GitHub <a target="_blank" rel="noopener" href="https://github.com/ruial/aks-devops">repo</a> with all the Infrastructure as Code (IaC) using Terraform.</p>
+<h2 id="Azure-DevOps"><a href="#Azure-DevOps" class="headerlink" title="Azure DevOps"></a>Azure DevOps</h2><p>Azure Devops is Microsoft’s solution to automate the software development lifecycle. It has the following services:</p>
+<ul>
+<li><p><strong>Azure Boards</strong> to manage work items, similar to Jira.</p>
+</li>
+<li><p><strong>Azure Pipelines</strong> for CI/CD automation, like Jenkins or GitHub Actions.</p>
+</li>
+<li><p><strong>Azure Repos</strong> is a repository service for Git or TFVC.</p>
+</li>
+<li><p><strong>Azure Test Plans</strong> for manual testing (really expensive)</p>
+</li>
+<li><p><strong>Azure Artifacts</strong> to publish packages, an alternative to Artifactory.</p>
+</li>
+</ul>
+<p>Using a SaaS instead of rolling your own comes at a cost. Pricing is a bit high at 5€/user and 12.65€/parallel job (for a self hosted agent), with 5 free users and 1 free job. For bigger enterprises, using self hosted agents instead of Microsoft hosted agents is usually the better option as parallel jobs are cheaper, builds should start faster, and you can make use of incremental builds, internal networking and <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview">managed identities</a>. When choosing Azure Devops instead of other CI/CD tools, pricing has to be considered as the free tier limits are reached very soon and pipelines start to queue, however there is less infrastructure and code to manage.</p>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h2><p>In recent years, <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes">Kubernetes</a> became the standard to manage applications deployed as containers. It simplifies operations like high availability, autoscaling, rolling updates, rollbacks, service discovery, among others. Some of the most important concepts are:</p>
+<ul>
+<li><p><strong>Pods</strong> - groups of containers that share the same compute resources and network. Each pod is scheduled to run on nodes inside the cluster and gets assigned an IP address.</p>
+</li>
+<li><p><strong>Deployments</strong> - describe the desired state of pods, like the number of replicas and rollout strategy.</p>
+</li>
+<li><p><strong>Services</strong> - to expose Pods for consumption inside (ClusterIP) or outside (NodePort, LoadBalancer) the cluster, as a network service.</p>
+</li>
+</ul>
+<p>Kubectl is the command line interface to manage the cluster, which interacts with the Kubernetes API. Deploys can be performed with imperative commands, but declarative yaml manifests are the way to go for a reproducible environment.</p>
+<p>When it comes to exposing services to the outside world, an alternative to using a Service of type LoadBalancer is to combine ClusterIP Services and an Ingress. A LoadBalancer Service per application results in a new public IP and public load balancer on the cloud, which can get expensive. An Ingress, such as <a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx/deploy/#azure">ingress-nginx</a> is often used to route HTTP and HTTPS traffic to internal services, based on the host header or request path, using a single public IP and cloud Load Balancer. With projects like <a target="_blank" rel="noopener" href="https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/azure.md">external-dns</a> and <a target="_blank" rel="noopener" href="https://cert-manager.io/docs/installation/kubernetes">cert-manager</a>, the management of DNS records and TLS certificates is fully automated.</p>
+<h2 id="Proof-of-concept"><a href="#Proof-of-concept" class="headerlink" title="Proof of concept"></a>Proof of concept</h2><p>As I was following a course on <a target="_blank" rel="noopener" href="https://github.com/stacksimplify/azure-aks-kubernetes-masterclass">Udemy</a>, I’ve adapted some of the examples for a simple use case of deploying a Go application and having the entire infrastructure managed with Terraform. With the <a target="_blank" rel="noopener" href="https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs">Azure Devops Provider</a> and <a target="_blank" rel="noopener" href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs">Azure Provider</a>, I was able to automate most of the provisioning, only had to configure a few things manually in Azure DevOps (add the Kubernetes Environment, create the pipelines) and edit some variables in the pipeline declarations after having the resources provisioned. You would be able to reproduce everything by cloning the repo. I will only describe the global structure, as each file is easy to interpret:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"># go app with multi-stage container</span><br><span class="line">├── goproject # go app with multi-stage container</span><br><span class="line">│   ├── Dockerfile</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   ├── main.go</span><br><span class="line">│   └── main_test.go</span><br><span class="line"># manifests for the go app and the ingress, in some orgs these</span><br><span class="line"># could even be managed in different repos by different teams</span><br><span class="line">├── kubernetes</span><br><span class="line">│   ├── gomanifests</span><br><span class="line">│   │   ├── deployment.yml</span><br><span class="line">│   │   └── service.yml</span><br><span class="line">│   └── ingressmanifests</span><br><span class="line">│       ├── azure.json</span><br><span class="line">│       ├── cert-manager-kube-system.yml</span><br><span class="line">│       ├── cert-manager.yml</span><br><span class="line">│       ├── cluster-issuer.yml</span><br><span class="line">│       ├── dns-secret.yml</span><br><span class="line">│       ├── external-dns.yml</span><br><span class="line">│       ├── ingress-nginx.yml</span><br><span class="line">│       └── ingress.yml</span><br><span class="line"># azure devops pipelines definitions</span><br><span class="line">├── pipelines</span><br><span class="line">│   ├── go-master-pipeline.yml</span><br><span class="line">│   └── ingress-pipeline.yml</span><br><span class="line"># terraform configuration files</span><br><span class="line">└── terraform</span><br><span class="line">    ├── ado.tf</span><br><span class="line">    ├── akscluster.tf</span><br><span class="line">    ├── main.tf</span><br><span class="line">    ├── output.tf</span><br><span class="line">    └── variables.tf</span><br></pre></td></tr></table></figure>
+
+<p>I’ve opted to include the cert-manager and ingress-nginx manifests in the repo but they could be deployed with their GitHub URL or using <a target="_blank" rel="noopener" href="https://helm.sh/">Helm</a>. The <em>azure.json</em> file has the details of the managed identity created by AKS, that also has the RBAC assignment to edit DNS records on the Azure DNS zone created by Terraform. To get the required IDs for the config file:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># managed identity client id</span></span><br><span class="line">az aks show -g aks-devops-we -n aks-devops-we-cluster --query <span class="string">&quot;identityProfile.kubeletidentity.clientId&quot;</span></span><br><span class="line"><span class="comment"># subscription id and tenant id</span></span><br><span class="line">az account list</span><br><span class="line"><span class="comment"># encode as base64 the secret azure.json on dns-secret.yml</span></span><br><span class="line">cat azure.json | base64</span><br></pre></td></tr></table></figure>
+
+<p>After deploying the resources, I’ve created the NS records <em>aks.briefbytes.com</em> pointing to the assigned Azure DNS nameservers to delegate this zone to Azure. A limitation of Azure Devops KubernetesManifest tasks required me to break the cert-manager manifest in 2 because it was not able to deploy Kubernetes objects in 2 different namespaces in the same task.</p>
+<p>Terraform is responsible for creating the Kubernetes cluster, the container registry (ACR) to store images, the public dns zone, role assignments and configuring the project and service connections on Azure Devops. This is achieved by running the following:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this could also be on a pipeline using service principal or managed identity</span></span><br><span class="line"><span class="built_in">export</span> AZDO_PERSONAL_ACCESS_TOKEN=&lt;Generate your PAT with full access permissions&gt;</span><br><span class="line"><span class="built_in">export</span> AZDO_ORG_SERVICE_URL=https://dev.azure.com/&lt;Your org&gt;</span><br><span class="line">az login</span><br><span class="line">terraform plan -out plan</span><br><span class="line">terraform apply plan</span><br><span class="line"></span><br><span class="line"><span class="comment"># to login on the cluster (context saved in ~/.kube/config)</span></span><br><span class="line">az aks get-credentials --resource-group aks-devops-we --name aks-devops-we-cluster</span><br><span class="line">kubectl cluster-info</span><br></pre></td></tr></table></figure>
+
+<p>Adding an environment on Azure Devops will create another service connection and deployments from different pipelines will be visible there. This must be done manually, as the Terraform provider does not yet support it.</p>
+<img src="/2021/Azure-Kubernetes-Service-Pipelines/aks-env.png" title="Azure Devops AKS Environment">
+
+<p>After adding the environment, make sure to create the pipeline and edit the ACR name, its service connection ID and of course set your own DNS zone. Your pipeline should run successfully:</p>
+<img src="/2021/Azure-Kubernetes-Service-Pipelines/go-pipeline-stages.png" title="AKS Pipeline Stages">
+
+<p>The creation of DNS records is fast but TLS certificates from <a target="_blank" rel="noopener" href="https://letsencrypt.org/">Let’s Encrypt</a> can take a few minutes to be issued. Take care when changing domain names in production to avoid downtime. You can use the following commands to inspect the logs:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs -n cert-manager -f &lt;kubectl-pod&gt;</span><br><span class="line">kubectl get certificate</span><br><span class="line">kubectl logs -f $(kubectl get po | egrep -o <span class="string">&#x27;external-dns[A-Za-z0-9-]+&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The final result should look like this:</p>
+<img src="/2021/Azure-Kubernetes-Service-Pipelines/aks-result.png" title="AKS Result">
+
+<p>With this setup, when code is pushed or merged to the master branch, the pipeline will publish a new image if the unit tests pass and do the rolling update without downtime. To save on AKS costs, do not enable logging as Log Analytics is <a target="_blank" rel="noopener" href="https://feedback.azure.com/forums/914020-azure-kubernetes-service-aks/suggestions/38495200-aks-has-a-high-log-analytics-cost-azure-monitor">costly</a>, however in production make sure to setup proper monitoring with Prometheus and logging with the Elastic stack or their alternatives. After testing, the cluster can be destroyed with Terraform or shutdown through Azure CLI:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">az extension add --name aks-preview</span><br><span class="line">az aks stop -g aks-devops-we -n aks-devops-we-cluster</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The cloud and Kubernetes provide massive productivity, scalability and reliability improvements and their adoption will surely continue to grow. There are so many more topics about Kubernetes and AKS that could be covered but I will finish this post with some useful docs:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/kubectl/cheatsheet">kubectl Cheat Sheet</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/aks/ingress-tls">AKS Ingress</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/pt-pt/azure/aks/configure-kubenet">AKS Networking</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display:none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display:none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Azure-DevOps"><span class="toc-number">1.</span> <span class="toc-text">Azure DevOps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proof-of-concept"><span class="toc-number">3.</span> <span class="toc-text">Proof of concept</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display:none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&text=Azure Kubernetes Service Pipelines"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&is_video=false&description=Azure Kubernetes Service Pipelines"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Azure Kubernetes Service Pipelines&body=Check out this article: https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&title=Azure Kubernetes Service Pipelines"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&name=Azure Kubernetes Service Pipelines&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2021/Azure-Kubernetes-Service-Pipelines/&t=Azure Kubernetes Service Pipelines"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick='return $("#nav-footer").toggle(),!1'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick='return $("#toc-footer").toggle(),!1'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick='return $("#share-footer").toggle(),!1'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021
+    Rui Almeida
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">$(function(){$(".highlight table").before('<span class="btn-copy tooltipped tooltipped-sw" aria-label="Copy to clipboard!"><i class="far fa-clone"></i></span>'),new ClipboardJS(".btn-copy",{text:function(e){return Array.from(e.nextElementSibling.querySelectorAll(".code")).reduce((e,t)=>e+t.innerText+"\n","")}}).on("success",function(e){e.trigger.setAttribute("aria-label","Copied!"),e.clearSelection()})})</script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+    <script type="text/javascript">!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="//www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+
+
+
+
+
+
+</body>
+</html>
