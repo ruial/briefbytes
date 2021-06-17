@@ -112,13 +112,15 @@ After adding the environment, make sure to create the pipeline and edit the ACR 
 
 {% asset_img "go-pipeline-stages.png" "AKS Pipeline Stages" %}
 
-The creation of DNS records is fast but TLS certificates from [Let's Encrypt](https://letsencrypt.org) can take a few minutes to be issued. Take care when changing domain names in production to avoid downtime. You can use the following commands to inspect the logs:
+The creation of DNS records is fast but TLS certificates from [Let's Encrypt](https://letsencrypt.org) can take a few minutes to be issued. You can use the following commands to inspect the logs:
 
 ```sh
 kubectl logs -n cert-manager -f <kubectl-pod>
 kubectl get certificate
 kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
 ```
+
+Take care when changing domain names in production to avoid downtime. Do not forget about readiness and liveness checks on real apps to ensure high availability, as services may take a few seconds on startup and they may become unhealthy because of a bad connection.
 
 The final result should look like this:
 
