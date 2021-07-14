@@ -1,8 +1,13 @@
 [
   {
-     "name":"9GAG",
-     "url":"https://github.com/ruial/9gag",
-     "desc":"A Node.js module to download 9GAG posts and comments"
+    "name":"Busca",
+    "url":"https://github.com/ruial/busca",
+    "desc":"A minimal full text search engine developed in Go"
+  },
+  {
+    "name":"9GAG",
+    "url":"https://github.com/ruial/9gag",
+    "desc":"A Node.js module to download 9GAG posts and comments"
   },
   {
     "name":"Remote Player",
