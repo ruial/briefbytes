@@ -121,29 +121,6 @@
     
     
     <entry>
-      <title>Automation with Node-RED</title>
-      <link href="/2020/Automation-with-Node-RED/"/>
-      <url>/2020/Automation-with-Node-RED/</url>
-      
-        <content type="html"><![CDATA[<p>Inspired by <a href="https://apps.apple.com/us/app/shortcuts/id915249334">iOS Shortcuts</a> and <a href="https://zapier.com/">Zapier</a>, I searched for an open source solution to easily create automations through a web interface and found two projects, <a href="https://nodered.org/">Node-RED</a> and <a href="https://n8n.io/">n8n</a>.</p><h2 id="Node-RED"><a href="#Node-RED" class="headerlink" title="Node-RED"></a>Node-RED</h2><p>As Node-RED is more low-level and mature than n8n, I picked it to create some integrations. It is a flow-based programming tool developed in Node.js and is part of the <a href="https://js.foundation/">JS foundation</a>. From the web browser, applications/flows are created by adding nodes and linking them together to send messages. Custom JavaScript code can be added in function nodes. The flows created are saved as JSON, which allows for easy sharing. To extend Node-RED, new nodes are developed by the community and published <a href="https://flows.nodered.org/">here</a>. I really appreciated their <a href="https://cookbook.nodered.org/">documentation</a> with common use cases. The fastest way to get started is using Docker Compose:</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nodered:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nodered/node-red:1.1.2</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nodered</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;1880:1880&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Europe/Lisbon</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nodered-data:/data</span></span><br></pre></td></tr></table></figure><p>Node-RED can even be deployed on a Raspberry Pi. If exposing it to the internet make sure to enable authentication and adequate security mechanisms such as a firewall or a reverse proxy. I will briefly describe 2 useful flows created for testing purposes.</p><h2 id="Example-flows"><a href="#Example-flows" class="headerlink" title="Example flows"></a>Example flows</h2><p>The first flow is triggered daily to get the title and description of the <a href="https://www.packtpub.com/packt/offers/free-learning">Packt</a> daily free e-book through their API. Using the excellent Telegram <a href="https://core.telegram.org/bots">Bot API</a>, a message is sent to a channel so I never forget to download a nice book.</p><img src="/2020/Automation-with-Node-RED/packt-flow.png" class="" title="Packt flow"><p>The second flow exposes an API with the latest projects in <a href="https://www.producthunt.com/">Product Hunt</a>. Node-RED already has nodes to scrape HTML using selectors and a template engine to render responses, although some data transformations are required to produce the final JSON.</p><img src="/2020/Automation-with-Node-RED/producthunt-flow.png" class="" title="Producthunt flow"><p>The flows were easy to create and topics like logging, using environment variables, web APIs and scraping were straightforward. To test them, import the code available in this <a href="https://gist.github.com/ruial/69dec3c00b991c3b75da16c16907f87d">gist</a>.</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Node-RED is a great tool to create small prototypes and personal automations, however I am still not convinced that low-code visual programming tools are fit for production environments due to edge cases and maintainability concerns.</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> automation </tag>
-            
-            <tag> javascript </tag>
-            
-            <tag> node.js </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Tips for writing a software engineering dissertation</title>
       <link href="/2020/Tips-for-writing-a-software-engineering-dissertation/"/>
       <url>/2020/Tips-for-writing-a-software-engineering-dissertation/</url>
@@ -157,29 +134,6 @@
             <tag> latex </tag>
             
             <tag> uml </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Avoid web scraping detection</title>
-      <link href="/2020/Avoid-web-scraping-detection/"/>
-      <url>/2020/Avoid-web-scraping-detection/</url>
-      
-        <content type="html"><![CDATA[<p>Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big search engines to crawl their content. I will share my opinion about this subject and how some websites detect web scraping.</p><h2 id="Motivation-for-web-scraping"><a href="#Motivation-for-web-scraping" class="headerlink" title="Motivation for web scraping"></a>Motivation for web scraping</h2><p>There are many legitimate reasons to scrape a website and I have a short story of mine. A few years ago, I really enjoyed watching memes from 9gag during my long train commute to university. Sadly, I had very low mobile data, so I created an automation to scrape a few pages of memes during the night and transfer them to my phone so I could watch them offline. I inspected their internal API and created a javascript client, which I open-sourced and shared with the community on <a href="https://www.npmjs.com/package/9gag">NPM</a>. This small contribution is now a part of fun personal projects made by other people like a <a href="https://github.com/casassg/meme_puller">machine learning classifier</a>, a <a href="https://github.com/NebulaEngineering/lab-cqrs-es">CQRS and event sourcing lab</a>, a <a href="https://github.com/Sam-Ryan/Scylla">discord bot</a>, an <a href="https://github.com/danylkaaa/ReservoirCodeInt20Test">aggregator website</a> and others.</p><p>Scraping enables automation, giving more freedom to power users. Some platforms do not like this because we won’t see their ads, however most power users block ads anyway as they usually cripple web apps. Other reasons to scrape may not be very ethical. For example, there are many bots scraping the web in search for emails to send spam. Any website is free to block scraping in any way they want, after all they are the ones that choose how to reply to requests. Linkedin sued a company for scraping their public content, but the court did not give them reason. A website term of services page hidden somewhere with a lot of text that no one reads is not really legally enforceable.</p><p>If websites provide a reasonable API, web scraping can be reduced. This way they can enforce limits on API clients, like the ammount of requests allowed per day, track how it is used and even make money by charging for additional API calls. Most web applications are already using internal APIs, they could be made public. Frequently, scrapers actually consume these internal APIs instead of parsing the whole website, which is more efficient for both sides.</p><h2 id="How-web-scraping-works-and-evade-detection"><a href="#How-web-scraping-works-and-evade-detection" class="headerlink" title="How web scraping works and evade detection"></a>How web scraping works and evade detection</h2><p>A web application can be rendered on the server side or client side. When the content rendered on the server and sent to the browser, scraping is easier because only HTML has to be parsed. When rendering happens on client side, a javascript interpreter is required to render the content, so a simple HTTP client is not enough to scrape content, a browser emulator like <a href="https://github.com/puppeteer/puppeteer">Puppeteer</a> must be used, which is more resource intensive. I recently had to update my old library to use Puppeteer to avoid a CAPTCHA check.</p><p>It is ironic that Google created their empire on web scraping and are the ones to create solutions like CAPTCHA to prevent others from crawling. Some websites even include metadata to help Google scrap their content more accurately and easily, using <a href="https://json-ld.org/">JSON-LD</a> for SEO purposes. There are many other crawlers that behave nicely and have good intentions.</p><p>So how is web scraping detected? Common methods include checking HTTP headers like the user agent, device fingerprinting with javascript and inspecting connection or behaviour patterns. The easiest solution to avoid being detected is to use Puppeteer with a <a href="https://www.npmjs.com/package/puppeteer-extra-plugin-stealth">stealth extension</a>, which already takes some steps to avoid detection. In addition, navigation should look like a real user, with random time between requests and do not access URLs not visible to a user. A pool of servers with different IP addresses may be needed for mass scale crawling, however many companies can detect if the IP is from major cloud providers, so residential IPs are better.</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Web scraping detection will always be a cat and mouse game and some ways of detecting this were presented. However, in the end, if information is publicly available, even a real human can act as a web scraper with or without web extensions to help automate the process.</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> javascript </tag>
-            
-            <tag> node.js </tag>
-            
-            <tag> scraping </tag>
             
         </tags>
       
