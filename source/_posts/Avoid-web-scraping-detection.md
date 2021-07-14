@@ -2,6 +2,7 @@
 title: Avoid web scraping detection
 date: 2020-04-18 16:00:00
 tags: [scraping, javascript, node.js]
+hidden: true
 ---
 
 Web scraping is the process of extracting useful data from a website. Google built their company on this. Many websites take measures to prevent scraping for various reasons, while still allowing big search engines to crawl their content. I will share my opinion about this subject and how some websites detect web scraping.

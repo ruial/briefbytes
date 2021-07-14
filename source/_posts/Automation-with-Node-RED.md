@@ -2,6 +2,7 @@
 title: Automation with Node-RED
 date: 2020-08-04 22:00:00
 tags: [automation, javascript, node.js]
+hidden: true
 ---
 
 Inspired by [iOS Shortcuts](https://apps.apple.com/us/app/shortcuts/id915249334) and [Zapier](https://zapier.com), I searched for an open source solution to easily create automations through a web interface and found two projects, [Node-RED](https://nodered.org) and [n8n](https://n8n.io).
