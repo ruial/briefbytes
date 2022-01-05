@@ -26,7 +26,7 @@ This is mostly personal opinion, people either tend to use what they are most fa
 
 It is useful to keep track of the application behaviour without having to access the server. For analytics, the most common approach is to use a solution like Google Analytics or the open-source privacy oriented Plausible Analytics. You can also complement these with web server logs.
 
-For logs and metrics, my favorite stack is Elasticsearch+Kibana and Prometheus+Grafana. However, it does not make sense to host these yourself until you grow to a certain size. Elasticsearch is particularly hungry for RAM. I had a good experience with Sematext free tier, which uses the Elastic stack, but opting for Grafana Cloud and Logz.io are also valid approaches.
+For logs and metrics, my favorite stack is Elasticsearch+Kibana and Prometheus+Grafana. However, it does not make sense to host these yourself until you grow to a certain size. Elasticsearch is particularly hungry for RAM. I had a good experience with Sematext free tier, which uses the Elastic stack, but opting for Grafana Cloud and Logz.io are also valid approaches. To build status pages I'm using Freshping for HTTP and TCP checks, StatusCake is popular too.
 
 ## Scaling when traction is gained
 
