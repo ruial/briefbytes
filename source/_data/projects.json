@@ -1,5 +1,10 @@
 [
   {
+    "name":"Ad Pruner",
+    "url":"https://adpruner.com",
+    "desc":"An ad-blocking VPN for mobile and desktop"
+  },
+  {
     "name":"Busca",
     "url":"https://github.com/ruial/busca",
     "desc":"A minimal full text search engine developed in Go"

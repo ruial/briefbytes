@@ -1,0 +1,25 @@
+@startuml web-architecture
+skinparam monochrome true
+skinparam backgroundColor #F9F9F9
+skinparam defaultTextAlignment center
+
+actor User
+rectangle Cloudflare as "Cloudflare\nReverse Proxy"
+rectangle LB as "Cloud Load\nBalancer"
+rectangle Nodes as "Kubernetes Cluster\n3 nodes" {
+  rectangle Nginx as "Nginx Ingress"
+  rectangle App1 as "Project 1\n2 replicas"
+  rectangle App2 as "Project 2\n3 replicas"
+}
+database MySQL
+database Redis as "Redis\nCache"
+
+User -> Cloudflare
+Cloudflare -> LB
+LB -> Nginx
+Nginx -down-> App1
+Nginx -up-> App2
+App1 -right-> MySQL
+App2 -right-> Redis
+
+@enduml
