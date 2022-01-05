@@ -2,6 +2,7 @@
 title: Extracting and analysing data using R
 date: 2019-09-25 23:00:00
 tags: [data, R]
+hidden: true
 ---
 
 To finish a Master's degree, students have to write a dissertation. As I'm on that path and out of curiosity, I wanted to get some insights on the dissertations written on my university in the last years. This was also a great opportunity to practice some data extraction and visualization skills that I learned by reading the free book [R for Data Science](https://r4ds.had.co.nz).
