@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "5.4.0"
+    "version": "6.1.0"
   },
   "scripts": {
     "start": "hexo server",
@@ -12,7 +12,7 @@
     "clean": "hexo clean"
   },
   "dependencies": {
-    "hexo": "^5.4.0",
+    "hexo": "^6.1.0",
     "hexo-asset-pipeline": "^1.8.0",
     "hexo-deployer-git": "^3.0.0",
     "hexo-generator-archive": "^1.0.0",
@@ -21,10 +21,15 @@
     "hexo-generator-index": "^2.0.0",
     "hexo-generator-search": "^2.4.3",
     "hexo-generator-tag": "^1.0.0",
-    "hexo-hide-posts": "^0.1.1",
-    "hexo-renderer-ejs": "^1.0.0",
-    "hexo-renderer-marked": "^4.0.0",
+    "hexo-hide-posts": "^0.2.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^5.0.0",
     "hexo-renderer-stylus": "^2.0.1",
-    "hexo-server": "^2.0.0"
+    "hexo-server": "^3.0.0"
+  },
+  "overrides" : {
+    "nib" : {
+      "stylus" : "^0.54.8"
+    }
   }
 }
