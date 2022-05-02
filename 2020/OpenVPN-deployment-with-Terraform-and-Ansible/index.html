@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
     <meta name="description" content="As the number of machines and services that you manage increases, manually creating and configuring your infrastructure is not scalable. As such, provisioning and configuration management tools, such">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenVPN deployment with Terraform and Ansible">
@@ -14,7 +14,7 @@
 <meta property="og:description" content="As the number of machines and services that you manage increases, manually creating and configuring your infrastructure is not scalable. As such, provisioning and configuration management tools, such">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-24T20:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-05T21:40:30.604Z">
+<meta property="article:modified_time" content="2022-05-02T17:41:39.583Z">
 <meta property="article:author" content="Rui Almeida">
 <meta property="article:tag" content="automation">
 <meta property="article:tag" content="ansible">
@@ -22,21 +22,21 @@
 <meta name="twitter:card" content="summary">
     
     
+      
         
-          
-              <link rel="shortcut icon" href="/images/desktop.ico">
-          
+          <link rel="shortcut icon" href="/images/desktop.ico">
         
+      
+      
         
-          
-            <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
-          
+          <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
         
+      
+      
         
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
-          
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
         
+      
     
     
     <title>OpenVPN deployment with Terraform and Ansible</title>
@@ -46,52 +46,38 @@
 
     
     
-      
-<link rel="stylesheet" href="/css/rtl.css">
-
-    
     
     
     
       <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
     
-<meta name="generator" content="Hexo 5.4.0"></head>
+	
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-         
-          <li><a href="/atom.xml">RSS</a></li>
-        
+        <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li><li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li><li><a href="/search/">Search</a></li><li><a href="/atom.xml">RSS</a></li>
       </ul>
     </span>
     <br>
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2020/Secure-Prometheus-with-OIDC-or-LDAP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="/2020/Secure-Prometheus-with-OIDC-or-LDAP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
         
         
-        <li><a class="icon" href="/2020/Tips-for-writing-a-software-engineering-dissertation/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="/2020/Tips-for-writing-a-software-engineering-dissertation/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
         
-        <li><a class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+        <li><a class="icon" aria-label="Back to top" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none">Previous post</span>
       <span id="i-next" class="info" style="display:none">Next post</span>
@@ -135,7 +121,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">BRIEF BYTES</span>
+        <span itemprop="name">Rui Almeida</span>
       </span>
       
     <div class="postdate">
@@ -167,9 +153,9 @@
 <li>Clone the <a target="_blank" rel="noopener" href="https://github.com/ruial/openvpn-demo">GitHub repository</a></li>
 <li>Generate an SSH key (<em>ssh-keygen</em>) or set an admin password for the server</li>
 <li>Create infrastructure using Terraform (check README)</li>
-<li>Edit the inventory.ini or your <em>/etc/hosts</em> to include the server IP</li>
+<li>Edit the inventory.ini or your <em>&#x2F;etc&#x2F;hosts</em> to include the server IP</li>
 <li>Run the Ansible playbook (check README)</li>
-<li>Start OpenVPN client (<em>openvpn –config playbooks/out/client-host.conf</em>)</li>
+<li>Start OpenVPN client (<em>openvpn –config playbooks&#x2F;out&#x2F;client-host.conf</em>)</li>
 <li>Destroy infrastructure when done (check README)</li>
 </ol>
 <h2 id="Demo-project-structure"><a href="#Demo-project-structure" class="headerlink" title="Demo project structure"></a>Demo project structure</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">├── playbooks</span><br><span class="line">│   ├── ansible.cfg         - ansible configuration file</span><br><span class="line">│   ├── handlers            - handlers for events</span><br><span class="line">│   ├── inventory.ini       - inventory of servers</span><br><span class="line">│   ├── main.yml            - main playbook (the entrypoint)</span><br><span class="line">│   ├── out                 - output folder for client config</span><br><span class="line">│   ├── tasks</span><br><span class="line">│   │   ├── easyrsa.yml     - easyrsa config tasks</span><br><span class="line">│   │   └── openvpn.yml     - openvpn config tasks</span><br><span class="line">│   └── templates</span><br><span class="line">│       ├── client.conf.j2  - openvpn client config template</span><br><span class="line">│       └── server.conf.j2  - openvpn server config template</span><br><span class="line">├── provision</span><br><span class="line">│   ├── instance.tf         - virtual machine and network association</span><br><span class="line">│   ├── main.tf             - provider definition and resource group</span><br><span class="line">│   ├── network.tf          - virtual network, subnet and security group</span><br><span class="line">│   ├── output.tf           - output variables (IP address)</span><br><span class="line">│   ├── terraform.tfstate   - automatically generated tfstate</span><br><span class="line">│   └── vars.tf             - input variables that can be overridden</span><br><span class="line">└── readme.md               - project info and instructions</span><br></pre></td></tr></table></figure>
@@ -260,19 +246,7 @@
   <div class="footer-right">
     <nav>
       <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-         
-          <li><a href="/atom.xml">RSS</a></li>
-        
+        <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li><li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li><li><a href="/search/">Search</a></li><li><a href="/atom.xml">RSS</a></li>
       </ul>
     </nav>
   </div>
@@ -281,24 +255,23 @@
     </div>
     
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload='this.onload=null,this.rel="stylesheet"'>
 
 
     
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
-<script src="/lib/jquery/jquery.min.js"></script>
 
 
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 
 
 
   
-<script src="/lib/clipboard/clipboard.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
   <script type="text/javascript">$(function(){$(".highlight table").before('<span class="btn-copy tooltipped tooltipped-sw" aria-label="Copy to clipboard!"><i class="far fa-clone"></i></span>'),new ClipboardJS(".btn-copy",{text:function(e){return Array.from(e.nextElementSibling.querySelectorAll(".code")).reduce((e,t)=>e+t.innerText+"\n","")}}).on("success",function(e){e.trigger.setAttribute("aria-label","Copied!"),e.clearSelection()})})</script>
 
 
@@ -308,13 +281,19 @@
 
 
 
-    <script type="text/javascript">!function(e,a,t,n,g,c){e.GoogleAnalyticsObject=n,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=+new Date,g=a.createElement(t),c=a.getElementsByTagName(t)[0],g.async=1,g.src="//www.google-analytics.com/analytics.js",c.parentNode.insertBefore(g,c)}(window,document,"script","ga"),ga("create","UA-141298250-1","auto"),ga("send","pageview")</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141298250-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-141298250-1")</script>
+
+
+
+
 
 
 
 
 
     <script type="text/javascript">var disqus_shortname="briefbytes";!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()</script>
+
 
 
 </body>
