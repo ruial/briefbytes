@@ -120,7 +120,7 @@ Ansible is an agentless configuration management tool, which uses SSH to push an
     - include: handlers/main.yml
 ```
 
-I didn't include all the tasks here because they would take too much space. At first, some required packages are installed and then *easy-rsa* is used to generate server and client certificates. Then, OpenVPN and the firewall are configured. Lastly, any changes to the server config will trigger a service reload and with the client config automatically transferred, you are able to use your VPN.
+I didn't include all the tasks here because they would take too much space. At first, some required packages are installed and then *easy-rsa* is used to generate server and client certificates. Then, OpenVPN and the firewall are configured. Lastly, any changes to the server config will trigger a service reload and with the client config automatically transferred, you are able to use your VPN. It is also possible to configure OpenVPN to use your own DNS server if you want to do DNS analytics or block ads with Pi-Hole, which is what I've done with [Ad Pruner](https://www.producthunt.com/posts/ad-pruner). Another cool use case is to setup port forwarding (with additional iptables rules), as an alternative to ngrok. If you want to better organize your IaaC and automate provisioning I can recommend [Terragrunt](https://terragrunt.gruntwork.io) and [Atlantis](https://www.runatlantis.io).
 
 ## Closing thoughts
 

@@ -2,6 +2,7 @@
 title: Tips for writing a software engineering dissertation
 date: 2020-06-30 19:00:00
 tags: [latex, uml]
+hidden: true
 ---
 
 During my university journey, I had to write many technical reports or articles about software engineering. I have some tips that helped accelerate the writing of my dissertation and may be helpful for others.

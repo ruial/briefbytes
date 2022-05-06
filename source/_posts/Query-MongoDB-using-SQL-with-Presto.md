@@ -18,7 +18,7 @@ Following the rise of NoSQL databases, many specialized query languages exist to
 
 The main advantage of Presto is that it has many data connectors, such as Kafka, Cassandra, Elasticsearch, MongoDB, Postgres, etc... It is then able to infer the schema automatically and handle semi-structured data. Arrays, nested objects, multi-database joins and the regular SQL operations are all supported.
 
-[Apache Drill](https://drill.apache.org) is a very similar alternative to Presto, however it appears to be less popular and doesn't support as many data sources. Performance comparisons are out of the scope for this post, but Presto is used by big players in data-intensive environments. Amazon created [Athena](https://aws.amazon.com/athena) which is based on Presto and heavily integrated in AWS.
+[Apache Drill](https://drill.apache.org) is a very similar alternative to Presto, however it appears to be less popular and doesn't support as many data sources. Performance comparisons are out of the scope for this post, but Presto is used by big players in data-intensive environments. Amazon created [Athena](https://aws.amazon.com/athena) which is based on Presto and heavily integrated in AWS. There is another recent popular Presto fork called [Trino](https://trino.io).
 
 ## Metabase
 

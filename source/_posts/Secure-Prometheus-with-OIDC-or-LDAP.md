@@ -30,4 +30,4 @@ I've setup a [demo project](https://github.com/ruial/monitoring-auth-demo) to de
 
 {% asset_img "auth.png" "Auth flow" %}
 
-Besides proxy mode, which passes all traffic through, Pomerium also supports Forward authentication, which causes the reverse proxy to call an endpoint to verify if the user is authorized. User information is then placed on request headers. Both technologies make use of cookie sessions and redirect the user to the login page when not authenticated. They also support [Redis](https://redis.io), which is important to preserve sessions during restarts or if using multiple instances.
+Besides proxy mode, which passes all traffic through, Pomerium also supports Forward authentication, which causes the reverse proxy to call an endpoint to verify if the user is authorized. User information is then placed on request headers. Both technologies make use of cookie sessions and redirect the user to the login page when not authenticated. They also support [Redis](https://redis.io), which is important to preserve sessions during restarts or if using multiple instances, as you don't usually want to depend on sticky sessions at the load balancer level.

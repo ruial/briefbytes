@@ -1,10 +1,5 @@
 [
   {
-    "name":"Ad Pruner",
-    "url":"https://adpruner.com",
-    "desc":"An ad-blocking VPN for mobile and desktop"
-  },
-  {
     "name":"Busca",
     "url":"https://github.com/ruial/busca",
     "desc":"A minimal full text search engine developed in Go"
@@ -15,8 +10,13 @@
     "desc":"A Node.js module to download 9GAG posts and comments"
   },
   {
-    "name":"Remote Player",
-    "url":"https://github.com/ruial/RemotePlayer",
-    "desc":"Java server and Android client to control video players"
+    "name":"Pyexam",
+    "url":"https://github.com/ruial/pyexam",
+    "desc":"A Python module to generate PDF exams from simple YAML documents"
+  },
+  {
+    "name":"F1 UDP telemetry client",
+    "url":"https://github.com/ruial/FormulaMetrics",
+    "desc":"A Scala app to export F1 2021 game metrics to CSV"
  }
 ]

@@ -105,7 +105,7 @@ The DNS protocol is a critical part of any infrastructure. Even the machines tha
 
 ## Conclusion
 
-This was a not so brief introduction to DNS. One last advice is if you ever need to develop software related with DNS, check the following Go libraries:
+This was a not so brief introduction to DNS. One last advice is if you ever need to develop software related with DNS (at work I created an API to manage DNS in multiple providers, including access control, which enabled DNS as code and k8s ExternalDNS integration with existing infrastructure), check the following Go libraries:
 
 - https://github.com/miekg/dns - to create DNS clients or servers
 

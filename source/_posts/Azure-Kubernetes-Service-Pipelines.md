@@ -135,7 +135,7 @@ az aks stop -g aks-devops-we -n aks-devops-we-cluster
 
 ## Conclusion
 
-The cloud and Kubernetes provide massive productivity, scalability and reliability improvements and their adoption will surely continue to grow. There are so many more topics about Kubernetes and AKS that could be covered but I will finish this post with some useful docs:
+The cloud and Kubernetes provide massive productivity, scalability and reliability improvements and their adoption will surely continue to grow. CRDs and custom operators enable k8s to manage more than containers, for example you can manage Kafka [topics](https://strimzi.io/docs/operators/latest/overview.html#configuration-points-resources_str). There are so many more topics about Kubernetes and AKS that could be covered but I will finish this post with some useful docs:
 
 - [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet)
 - [AKS Ingress](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)

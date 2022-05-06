@@ -4,7 +4,7 @@ date: 2020-02-08 15:38:06
 tags: [data, R]
 ---
 
-In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The [caret](https://topepo.github.io/caret/available-models.html) library in R makes it easy to test different machine learning algorithms.
+After my last post on {% post_link Extracting-and-analysing-data-using-R "data analysis"%}, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The [caret](https://topepo.github.io/caret/available-models.html) library in R makes it easy to test different machine learning algorithms.
 
 ## Machine learning
 
@@ -60,7 +60,7 @@ A lot of feature engineering was done to improve the predictions. A few variable
 
 Lasso regression achieved 0.11183 CV RMSE and 0.11911 test RMSE. Elasticnet was close behind, while ridge/linear regression and gradient boosting were worst but still an improvement over a mean baseline.
 
-To improve results I used k-means clustering to create 2 clusters and train a lasso model for each cluster. With this approach, the cluster for each test observation had to be predicted. Performance improved to 0.11897 RMSE. I have seen this cluster and then predict approach in a MOOC I have completed on EDX called The Analytics Edge, which I do recommend as it was very practical, easy to follow, covered many topics and included many examples and exercises.
+To improve results I used k-means clustering to create 2 clusters and train a lasso model for each cluster. With this approach, the cluster for each test observation had to be predicted. Performance improved to 0.11897 RMSE. I have seen this cluster and then predict with linear models (not really needed for tree based models) approach in the EDX MOOC called The Analytics Edge, which I do recommend as it was very practical, easy to follow, covered many topics and included many examples and exercises.
 
 {% asset_img "clusters.png" "Clusters" %}
 

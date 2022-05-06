@@ -4,7 +4,7 @@ date: 2022-01-05 21:05:00
 tags: [architecture, cloud]
 ---
 
-There is a huge amount of people that like to develop side projects. I mostly do it because I want to learn new things, but gaining some passive income is also an attractive idea. In the last months I launched [Ad Pruner](https://adpruner.com), an OpenVPN and Pi-hole as a service, and I will describe different architecture and infrastructure alternatives.
+There is a huge amount of people that like to develop side projects. I mostly do it because I want to learn new things, but gaining some passive income is also an attractive idea. In the last months I launched [Ad Pruner](https://www.producthunt.com/posts/ad-pruner), an OpenVPN and Pi-hole as a service, and I will describe different architecture and infrastructure alternatives.
 
 ## Domain registration and DNS
 
@@ -26,7 +26,7 @@ This is mostly personal opinion, people either tend to use what they are most fa
 
 It is useful to keep track of the application behaviour without having to access the server. For analytics, the most common approach is to use a solution like Google Analytics or the open-source privacy oriented Plausible Analytics. You can also complement these with web server logs.
 
-For logs and metrics, my favorite stack is Elasticsearch+Kibana and Prometheus+Grafana. However, it does not make sense to host these yourself until you grow to a certain size. Elasticsearch is particularly hungry for RAM. I had a good experience with Sematext free tier, which uses the Elastic stack, but opting for Grafana Cloud and Logz.io are also valid approaches. To build status pages I'm using Freshping for HTTP and TCP checks, StatusCake is popular too.
+For metrics and log analytics, my favorite stack is Elasticsearch+Kibana and Prometheus+Grafana. However, it does not make sense to host these yourself until you grow to a certain size. Elasticsearch is particularly hungry for RAM. I had a good experience with Sematext free tier, which uses the Elastic stack, but opting for Grafana Cloud and Logz.io are also valid approaches. At scale, it is common to have agents like Filebeat to send application logs to Kafka as a buffer, to prevent overloading Elastic and doing additional processing in Logstash. To build status pages I'm using Freshping for HTTP and TCP checks, StatusCake is popular too.
 
 ## Scaling when traction is gained
 

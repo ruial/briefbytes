@@ -4,7 +4,7 @@ date: 2019-05-27 22:00:00
 tags: [analytics, android, ios]
 ---
 
-As a part of my job, I occasionally have to intercept HTTPS requests made from a mobile application. This is required to troubleshoot some issues and guarantee that the correct data is being sent. I will explain how I do it and talk about analytics while I briefly analyze a popular app.
+As a part of my previous job, I occasionally had to intercept HTTPS requests made from a mobile application. This is required to troubleshoot some issues and guarantee that the correct data is being sent. I will explain how I do it and talk about analytics while I briefly analyze a popular app.
 
 ## Analytics
 

@@ -166,4 +166,4 @@ Keep in mind that this hack works for single player only. Server side software s
 
 Reverse engineering is hard. I admire the researchers who have to analyze software/malware in similar ways. Making complex cheats is also extremely time consuming. For example, we can draw enemies through walls or even automatically aim and shoot against them by reading their coordinates and applying some game/engine dependent math, but a lot of study is required.
 
-The full source code is available on [GitHub](https://github.com/ruial/linux-game-hack-example).
+The full source code is available on [GitHub](https://github.com/ruial/linux-game-hack-example) and was tested on Ubuntu 16.04 and Xonotic v0.8.2.
