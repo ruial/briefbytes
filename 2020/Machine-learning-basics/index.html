@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
-    <meta name="description" content="In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The caret librar">
+    <meta name="description" content="After my last post on data analysis, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine learning basics">
 <meta property="og:url" content="https://briefbytes.com/2020/Machine-learning-basics/index.html">
 <meta property="og:site_name" content="BRIEF BYTES">
-<meta property="og:description" content="In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The caret librar">
+<meta property="og:description" content="After my last post on data analysis, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/tree.png">
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/titanic-data.png">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/clusters.png">
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/wordcloud.png">
 <meta property="article:published_time" content="2020-02-08T15:38:06.000Z">
-<meta property="article:modified_time" content="2022-05-02T18:04:32.126Z">
+<meta property="article:modified_time" content="2022-05-06T19:13:28.660Z">
 <meta property="article:author" content="Rui Almeida">
 <meta property="article:tag" content="data">
 <meta property="article:tag" content="R">
@@ -76,7 +76,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="/2020/Tips-for-writing-a-software-engineering-dissertation/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="/2020/OpenVPN-deployment-with-Terraform-and-Ansible/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2019/Query-MongoDB-using-SQL-with-Presto/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
@@ -151,7 +151,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>In this post I will briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The <a target="_blank" rel="noopener" href="https://topepo.github.io/caret/available-models.html">caret</a> library in R makes it easy to test different machine learning algorithms.</p>
+    <p>After my last post on <a href="/2019/Extracting-and-analysing-data-using-R/" title="data analysis">data analysis</a>, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The <a target="_blank" rel="noopener" href="https://topepo.github.io/caret/available-models.html">caret</a> library in R makes it easy to test different machine learning algorithms.</p>
 <h2 id="Machine-learning"><a href="#Machine-learning" class="headerlink" title="Machine learning"></a>Machine learning</h2><p>Machine learning algorithms are able to learn from past data how to make predictions on new data. The most common types of ML algorithms are supervised or unsupervised.</p>
 <p>Supervised algorithms are used to solve classification (predict a class) and regression (predict continuous variable) problems. Training data contains labels and common metrics to evaluate models are accuracy, precision and recall for classification, or root mean square error (RMSE) and R-squared (R2) for regression. Prediction of time series can be made using other type of statistical models, like ARIMA and <a target="_blank" rel="noopener" href="https://facebook.github.io/prophet">prophet</a>.</p>
 <p>Unsupervised algorithms usually consist on dimensionality reduction (PCA, SVD, t-sne), clustering (hierarchical, k-means, DBSCAN), anomaly detection and a few others. These do not require training data, and there are different techniques to evaluate each algorithm.</p>
@@ -172,7 +172,7 @@
 <img src="/2020/Machine-learning-basics/correlation.png" title="Correlation matrix">
 
 <p>Lasso regression achieved 0.11183 CV RMSE and 0.11911 test RMSE. Elasticnet was close behind, while ridge&#x2F;linear regression and gradient boosting were worst but still an improvement over a mean baseline.</p>
-<p>To improve results I used k-means clustering to create 2 clusters and train a lasso model for each cluster. With this approach, the cluster for each test observation had to be predicted. Performance improved to 0.11897 RMSE. I have seen this cluster and then predict approach in a MOOC I have completed on EDX called The Analytics Edge, which I do recommend as it was very practical, easy to follow, covered many topics and included many examples and exercises.</p>
+<p>To improve results I used k-means clustering to create 2 clusters and train a lasso model for each cluster. With this approach, the cluster for each test observation had to be predicted. Performance improved to 0.11897 RMSE. I have seen this cluster and then predict with linear models (not really needed for tree based models) approach in the EDX MOOC called The Analytics Edge, which I do recommend as it was very practical, easy to follow, covered many topics and included many examples and exercises.</p>
 <img src="/2020/Machine-learning-basics/clusters.png" title="Clusters">
 
 <p>With a weighted combination of all models, a final 0.11765 RMSE was reached, which at the time was enough to be in the top 20%. To further improve results more feature engineering and hyperparameter tuning would be required.</p>
