@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+    <meta name="description" content="Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about search engines and machine learning (ML), and now we will see how to apply ML to rank (o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning to rank and ML pipelines">
+<meta property="og:url" content="https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/index.html">
+<meta property="og:site_name" content="BRIEF BYTES">
+<meta property="og:description" content="Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about search engines and machine learning (ML), and now we will see how to apply ML to rank (o">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-11T21:45:00.000Z">
+<meta property="article:modified_time" content="2022-05-11T20:46:56.833Z">
+<meta property="article:author" content="Rui Almeida">
+<meta property="article:tag" content="data">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/desktop.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple.png">
+        
+      
+    
+    
+    <title>Learning to rank and ML pipelines</title>
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    
+    
+    
+    
+      <link rel="alternate" href="/atom.xml" title="BRIEF BYTES" type="application/atom+xml">
+    
+	
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick='$("html, body").animate({scrollTop:0},"fast")' style="display:none"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li><li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li><li><a href="/search/">Search</a></li><li><a href="/atom.xml">RSS</a></li>
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/The-architecture-of-a-small-side-project/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none">Previous post</span>
+      <span id="i-next" class="info" style="display:none">Next post</span>
+      <span id="i-top" class="info" style="display:none">Back to top</span>
+      <span id="i-share" class="info" style="display:none">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display:none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&text=Learning to rank and ML pipelines"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&is_video=false&description=Learning to rank and ML pipelines"><i class="fab fa-pinterest" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Learning to rank and ML pipelines&body=Check out this article: https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-get-pocket" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-reddit" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-stumbleupon" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-digg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&name=Learning to rank and ML pipelines&description="><i class="fab fa-tumblr" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&t=Learning to rank and ML pipelines"><i class="fab fa-hacker-news" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Search-relevance"><span class="toc-number">1.</span> <span class="toc-text">Search relevance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LTR-workflow"><span class="toc-number">2.</span> <span class="toc-text">LTR workflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ML-Pipelines"><span class="toc-number">3.</span> <span class="toc-text">ML Pipelines</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Learning to rank and ML pipelines
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Rui Almeida</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-05-11T21:45:00.000Z" itemprop="datePublished">2022-05-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/data/" rel="tag">data</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about <a href="/2021/Building-a-full-text-search-engine/" title="search engines">search engines</a> and <a href="/2020/Machine-learning-basics/" title="machine learning (ML)">machine learning (ML)</a>, and now we will see how to apply ML to rank (or re-rank) search results. Additionally, I will discuss why ML workflows should be automated and look into a few alternatives to build ML pipelines.</p>
+<h2 id="Search-relevance"><a href="#Search-relevance" class="headerlink" title="Search relevance"></a>Search relevance</h2><p>Even when using existing technologies like Elasticsearch, engineers still have to tune their index&#x2F;queries to optimize results for relevancy. For example, when searching news, the title is more relevant than the body and recent news are more relevant than older ones. <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/guide/current/relevance-conclusion.html">Tuning</a> a search engine for optimal results can be quite challenging and requires proper instrumentation and and validation. You can find a presentation about using Logistic regression to select boost parameters <a target="_blank" rel="noopener" href="https://haystackconf.com/us2021/talk-6/">here</a>.</p>
+<p>Although machine learning is computationally expensive, it can be applied for ranking problems and return highly relevant results using plugins like <a target="_blank" rel="noopener" href="https://opensourceconnections.com/blog/2017/04/03/test-drive-elasticsearch-learn-to-rank-linear-model/">Elasticsearch Learning to Rank (LTR)</a>, which supports linear models and xgboost, a tree-based model. Numerical features are required to train ML models and significantly impact performance metrics. The <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/project/mslr/">MSLR dataset</a> is often used to benchmark LTR models and contains query&#x2F;relevance judgments, with features like tf-idf statistics, pagerank, bm25 and so on.</p>
+<h2 id="LTR-workflow"><a href="#LTR-workflow" class="headerlink" title="LTR workflow"></a>LTR workflow</h2><p>As you can’t improve what you can’t measure, let’s assume you already have some infrastructure in place, like an analytics solution to measure search relevancy (manual&#x2F;crowdsourced relevance judgments or click&#x2F;session data). Afterwards, you can gather the data, build features, train different models&#x2F;hyperparameters and deploy the best one. CI&#x2F;CD for ML projects is harder to get right as additional artifacts should be tracked and the models need retraining as performance drifts over time.</p>
+<p>Python, Scala and R are among the most popular languages for ML and they’re all suitable for NLP&#x2F;Ranking as they have a healthy ecosystem of numerical packages with efficient sparse matrix representations, text processing techniques and ML algorithms. Python has the edge, especially with <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/index">transformers</a>, while Scala is popular for data streaming (Flink, Kafka streams, Spark streaming) and R is the best for data visualization while more limited for production workloads. In <a target="_blank" rel="noopener" href="https://github.com/ruial/ltr">this repo</a> you will find a Python notebook to train different LTR models on the first fold of MSLR-WEB10K, using pontwise&#x2F;pairwise&#x2F;listwise approaches, along with a comparison of Python and Scala for prediction.</p>
+<p>These are the metrics I got on the test set with ~240k samples:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Linear model:</span><br><span class="line">  - ndcg@10:      0.4</span><br><span class="line">  - python time:  0.5s</span><br><span class="line">  - scala time:   0.05s</span><br><span class="line"></span><br><span class="line">XGBoost model:</span><br><span class="line">  - ndcg@10:     0.5</span><br><span class="line">  - python time: 0.8s</span><br><span class="line">  - scala time:  0.4s</span><br></pre></td></tr></table></figure>
+
+<p>The batch inference times in Python are very fast, as most code executed is actually native. I haven’t made tests in a real-time inference scenario (e.g.: REST API or queue&#x2F;stream), but even if Python is slightly slower serializing&#x2F;deserializing data, it is trivial to increase the number of instances and setup load balancing. The development effort of deploying workloads on more performant languages, such as Scala, does not seem worth it for the small latency gains. LTR is also usually applied as a re-ranking strategy on the top K results to reduce loading times.</p>
+<p>For more info on LTR:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://tech.olx.com/ranking-ads-with-machine-learning-ee03d7734bf4">https://tech.olx.com/ranking-ads-with-machine-learning-ee03d7734bf4</a></li>
+<li><a target="_blank" rel="noopener" href="https://everdark.github.io/k9/notebooks/ml/learning_to_rank/learning_to_rank.html">https://everdark.github.io/k9/notebooks/ml/learning_to_rank/learning_to_rank.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.manning.com/books/ai-powered-search">https://www.manning.com/books/ai-powered-search</a></li>
+</ul>
+<h2 id="ML-Pipelines"><a href="#ML-Pipelines" class="headerlink" title="ML Pipelines"></a>ML Pipelines</h2><p>CI&#x2F;CD systems like Jenkins or Github Actions allow workflows to be triggered via API&#x2F;Cron, but they are not suitable for ML workflows, since they lack some features&#x2F;integrations and agents may not have the required resources. A possible alternative is <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html">Airflow</a>, which is commonly used for scheduled ETL workflows and has operators to run tasks in Kubernetes (k8s) and cloud services like AWS Batch&#x2F;ECS. I didn’t find the development experience to be the fastest (build docker image, upload image, update dag, trigger dag) and would require maintaining more glue code for ML tasks. <a target="_blank" rel="noopener" href="https://orion-docs.prefect.io/">Prefect Orion</a> is a mature successor to Airflow, with a simpler architecture and better development experience, but since it is a generic workflow orchestration platform, it requires additional work to integrate with the ML ecosystem.</p>
+<p>A viable alternative, which has a low maintenance cost, though higher lock-in, are the could offerings like AWS Sagemaker and Databricks with MLflow. However, my favorite alternative so far is <a target="_blank" rel="noopener" href="https://metaflow.org/">Metaflow</a>, a modular framework to build ML pipelines. Tasks can be run locally, in AWS Batch or in k8s, allowing data scientists to develop and test the pipelines from their machine, handles dependency management with Conda, has caching, integrates with existing schedulers (AWS Step Functions, Argo Workflows), provides a web UI, and the Python client can be used to retrieve models or experiment metrics. Metaflow does not handle model deployment or monitoring, but it can be done with a specialized platform like <a target="_blank" rel="noopener" href="https://github.com/SeldonIO/seldon-core">Seldon</a> or by reusing the current organization’s infrastructure. I recommend reading the excellent book <a target="_blank" rel="noopener" href="https://www.manning.com/books/effective-data-science-infrastructure">Data Science Infrastructure</a> if you are interested in learning more about the topic.</p>
+<p>These articles cover ML pipelines in more detail:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://huyenchip.com/2021/09/13/data-science-infrastructure.html">https://huyenchip.com/2021/09/13/data-science-infrastructure.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://ljvmiranda921.github.io/notebook/2021/05/15/navigating-the-mlops-landscape-part-2/">https://ljvmiranda921.github.io/notebook/2021/05/15/navigating-the-mlops-landscape-part-2/</a></li>
+<li><a target="_blank" rel="noopener" href="https://datatalks.club/blog/mlops-10-minutes.html">https://datatalks.club/blog/mlops-10-minutes.html</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display:none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/atom.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display:none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Search-relevance"><span class="toc-number">1.</span> <span class="toc-text">Search relevance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LTR-workflow"><span class="toc-number">2.</span> <span class="toc-text">LTR workflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ML-Pipelines"><span class="toc-number">3.</span> <span class="toc-text">ML Pipelines</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display:none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&text=Learning to rank and ML pipelines"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&is_video=false&description=Learning to rank and ML pipelines"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Learning to rank and ML pipelines&body=Check out this article: https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&title=Learning to rank and ML pipelines"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&name=Learning to rank and ML pipelines&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://briefbytes.com/2022/Learning-to-rank-and-ML-pipelines/&t=Learning to rank and ML pipelines"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick='return $("#nav-footer").toggle(),!1'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick='return $("#toc-footer").toggle(),!1'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick='return $("#share-footer").toggle(),!1'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick='$("html, body").animate({scrollTop:0},"fast")'><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2022
+    Rui Almeida
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/archives/">Writing</a></li><li><a target="_blank" rel="noopener" href="https://github.com/ruial">Projects</a></li><li><a href="/search/">Search</a></li><li><a href="/atom.xml">RSS</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload='this.onload=null,this.rel="stylesheet"'>
+
+
+    
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">$(function(){$(".highlight table").before('<span class="btn-copy tooltipped tooltipped-sw" aria-label="Copy to clipboard!"><i class="far fa-clone"></i></span>'),new ClipboardJS(".btn-copy",{text:function(e){return Array.from(e.nextElementSibling.querySelectorAll(".code")).reduce((e,t)=>e+t.innerText+"\n","")}}).on("success",function(e){e.trigger.setAttribute("aria-label","Copied!"),e.clearSelection()})})</script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141298250-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-141298250-1")</script>
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">var disqus_shortname="briefbytes";!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()</script>
+
+
+
+</body>
+</html>
