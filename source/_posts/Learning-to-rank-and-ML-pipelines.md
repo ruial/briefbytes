@@ -21,18 +21,21 @@ Python, Scala and R are among the most popular languages for ML and they're all 
 These are the metrics I got on the test set with ~240k samples:
 
 ```
-Linear model:
-  - ndcg@10:      0.4
-  - python time:  0.5s
-  - scala time:   0.05s
+Linear model with standard scaler:
+  - ndcg@10:        0.4
+  - training:       7s
+  - python predict: 80ms
+  - scala predict:  50ms
 
 XGBoost model:
-  - ndcg@10:     0.5
-  - python time: 0.8s
-  - scala time:  0.4s
+  - ndcg@10:        0.5
+  - cpu training:   52s
+  - gpu training:   16s
+  - python predict: 800ms
+  - scala predict:  400ms
 ```
 
-The batch inference times in Python are very fast, as most code executed is actually native. I haven't made tests in a real-time inference scenario (e.g.: REST API or queue/stream), but even if Python is slightly slower serializing/deserializing data, it is trivial to increase the number of instances and setup load balancing. The development effort of deploying workloads on more performant languages, such as Scala, does not seem worth it for the small latency gains. LTR is also usually applied as a re-ranking strategy on the top K results to reduce loading times.
+The batch inference times in Python are very fast, as most code executed is actually native. I haven't made tests in a real-time inference scenario (e.g.: REST API or queue/stream), but even if Python is slightly slower serializing/deserializing or transforming data, it is trivial to increase the number of instances and setup load balancing. The development effort of deploying workloads on more performant languages, such as Scala, does not seem worth it for the small latency gains. LTR is also usually applied as only a re-ranking strategy on the top K results to reduce loading times.
 
 For more info on LTR:
 
