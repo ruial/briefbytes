@@ -2,6 +2,7 @@
 title: The architecture of a small side project
 date: 2022-01-05 21:05:00
 tags: [architecture, cloud]
+hidden: true
 ---
 
 There is a huge amount of people that like to develop side projects. I mostly do it because I want to learn new things, but gaining some passive income is also an attractive idea. In the last months I launched [Ad Pruner](https://www.producthunt.com/posts/ad-pruner), an OpenVPN and Pi-hole as a service, and I will describe different architecture and infrastructure alternatives.

@@ -1,5 +1,10 @@
 [
   {
+    "name":"News",
+    "url":"https://github.com/ruial/news",
+    "desc":"A tech news aggregator and recommender developed in Java"
+  },
+  {
     "name":"Busca",
     "url":"https://github.com/ruial/busca",
     "desc":"A minimal full text search engine developed in Go"
