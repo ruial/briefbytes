@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/clusters.png">
 <meta property="og:image" content="https://briefbytes.com/2020/Machine-learning-basics/wordcloud.png">
 <meta property="article:published_time" content="2020-02-08T15:38:06.000Z">
-<meta property="article:modified_time" content="2023-01-22T22:33:20.460Z">
+<meta property="article:modified_time" content="2023-06-14T12:48:49.948Z">
 <meta property="article:author" content="Rui Almeida">
 <meta property="article:tag" content="data">
 <meta property="article:tag" content="R">
@@ -58,7 +58,7 @@
     
 	
 	
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -151,7 +151,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>After my last post on <a href="/2019/Extracting-and-analysing-data-using-R/" title="data analysis">data analysis</a>, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The <a target="_blank" rel="noopener" href="https://topepo.github.io/caret/available-models.html">caret</a> library in R makes it easy to test different machine learning algorithms.</p>
+    <p>After my last post on <a href="/2019/Extracting-and-analysing-data-using-R/" title="Extracting and analysing data using R">data analysis</a>, I will now briefly describe how to achieve a good score for the Titanic survival classification, the house prices regression, and the NLP twitter disaster problems in Kaggle. The <a target="_blank" rel="noopener" href="https://topepo.github.io/caret/available-models.html">caret</a> library in R makes it easy to test different machine learning algorithms.</p>
 <h2 id="Machine-learning"><a href="#Machine-learning" class="headerlink" title="Machine learning"></a>Machine learning</h2><p>Machine learning algorithms are able to learn from past data how to make predictions on new data. The most common types of ML algorithms are supervised or unsupervised.</p>
 <p>Supervised algorithms are used to solve classification (predict a class) and regression (predict continuous variable) problems. Training data contains labels and common metrics to evaluate models are accuracy, precision and recall for classification, or root mean square error (RMSE) and R-squared (R2) for regression. Prediction of time series can be made using other type of statistical models, like ARIMA and <a target="_blank" rel="noopener" href="https://facebook.github.io/prophet">prophet</a>.</p>
 <p>Unsupervised algorithms usually consist on dimensionality reduction (PCA, SVD, t-sne), clustering (hierarchical, k-means, DBSCAN), anomaly detection and a few others. These do not require training data, and there are different techniques to evaluate each algorithm.</p>

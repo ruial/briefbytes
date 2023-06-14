@@ -14,7 +14,7 @@
 <meta property="og:description" content="Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about search engines and machine learning (ML), and now we will see how to apply ML to rank (o">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-11T21:45:00.000Z">
-<meta property="article:modified_time" content="2023-01-22T22:33:20.460Z">
+<meta property="article:modified_time" content="2023-06-14T12:48:49.948Z">
 <meta property="article:author" content="Rui Almeida">
 <meta property="article:tag" content="data">
 <meta property="article:tag" content="python">
@@ -52,7 +52,7 @@
     
 	
 	
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -143,7 +143,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about <a href="/2021/Building-a-full-text-search-engine/" title="search engines">search engines</a> and <a href="/2020/Machine-learning-basics/" title="machine learning (ML)">machine learning (ML)</a>, and now we will see how to apply ML to rank (or re-rank) search results. Additionally, I will discuss why ML workflows should be automated and look into a few alternatives to build ML pipelines.</p>
+    <p>Ranking is a core task in information retrieval (IR) and recommender systems. In previous posts, I talked about <a href="/2021/Building-a-full-text-search-engine/" title="Building a full text search engine">search engines</a> and <a href="/2020/Machine-learning-basics/" title="Machine learning basics">machine learning (ML)</a>, and now we will see how to apply ML to rank (or re-rank) search results. Additionally, I will discuss why ML workflows should be automated and look into a few alternatives to build ML pipelines.</p>
 <h2 id="Search-relevance"><a href="#Search-relevance" class="headerlink" title="Search relevance"></a>Search relevance</h2><p>Even when using existing technologies like Elasticsearch, engineers still have to tune their index&#x2F;queries to optimize results for relevancy. For example, when searching news, the title is more relevant than the body and recent news are more relevant than older ones. <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/guide/current/relevance-conclusion.html">Tuning</a> a search engine for optimal results can be quite challenging and requires proper instrumentation and and validation. You can find a presentation about using Logistic regression to select boost parameters <a target="_blank" rel="noopener" href="https://haystackconf.com/us2021/talk-6/">here</a>.</p>
 <p>Although machine learning is computationally expensive, it can be applied for ranking problems and return highly relevant results using plugins like <a target="_blank" rel="noopener" href="https://opensourceconnections.com/blog/2017/04/03/test-drive-elasticsearch-learn-to-rank-linear-model/">Elasticsearch Learning to Rank (LTR)</a>, which supports linear models and xgboost, a tree-based model. Numerical features are required to train ML models and significantly impact performance metrics. The <a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/project/mslr/">MSLR dataset</a> is often used to benchmark LTR models and contains query&#x2F;relevance judgments, with features like tf-idf statistics, pagerank, bm25 and so on.</p>
 <h2 id="LTR-workflow"><a href="#LTR-workflow" class="headerlink" title="LTR workflow"></a>LTR workflow</h2><p>As you can’t improve what you can’t measure, let’s assume you already have some infrastructure in place, like an analytics solution to measure search relevancy (manual&#x2F;crowdsourced relevance judgments or click&#x2F;session data). Afterwards, you can gather the data, build features, train different models&#x2F;hyperparameters and deploy the best one. CI&#x2F;CD for ML projects is harder to get right as additional artifacts should be tracked and the models need retraining as performance drifts over time.</p>
