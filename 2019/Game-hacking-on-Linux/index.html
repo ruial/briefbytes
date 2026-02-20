@@ -20,11 +20,11 @@
 <meta property="og:image" content="https://briefbytes.com/2019/Game-hacking-on-Linux/pointer-scan.png">
 <meta property="og:image" content="https://briefbytes.com/2019/Game-hacking-on-Linux/dissect.png">
 <meta property="article:published_time" content="2019-07-20T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-14T12:53:14.132Z">
+<meta property="article:modified_time" content="2026-02-20T23:32:00.579Z">
 <meta property="article:author" content="Rui Almeida">
+<meta property="article:tag" content="c">
 <meta property="article:tag" content="hacking">
 <meta property="article:tag" content="linux">
-<meta property="article:tag" content="c">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://briefbytes.com/2019/Game-hacking-on-Linux/health-search.png">
     
@@ -60,7 +60,7 @@
     
 	
 	
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -109,7 +109,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-are-game-hacks-made"><span class="toc-number">1.</span> <span class="toc-text">How are game hacks made</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cheat-Engine"><span class="toc-number">2.</span> <span class="toc-text">Cheat Engine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Searching-the-health"><span class="toc-number">2.1.</span> <span class="toc-text">Searching the health</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-scan"><span class="toc-number">2.2.</span> <span class="toc-text">Pointer scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dissect-data-structures"><span class="toc-number">2.3.</span> <span class="toc-text">Dissect data structures</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-number">3.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">4.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-are-game-hacks-made"><span class="toc-number">1.</span> <span class="toc-text">How are game hacks made</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cheat-Engine"><span class="toc-number">2.</span> <span class="toc-text">Cheat Engine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Searching-the-health"><span class="toc-number">2.1.</span> <span class="toc-text">Searching the health</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-scan"><span class="toc-number">2.2.</span> <span class="toc-text">Pointer scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dissect-data-structures"><span class="toc-number">2.3.</span> <span class="toc-text">Dissect data structures</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-number">3.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modding-and-game-development"><span class="toc-number">4.</span> <span class="toc-text">Modding and game development</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">5.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -186,6 +186,24 @@
 <figure class="highlight c"><figcaption><span>Main loop</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">open_game</span><span class="params">(Game *game)</span> &#123;</span><br><span class="line">  <span class="keyword">while</span> ((game-&gt;pid = find_pid(<span class="string">&quot;xonotic-linux64-sdl&quot;</span>)) == <span class="number">0</span>) &#123;</span><br><span class="line">    sleep_ms(<span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> ((game-&gt;module = module_addr(game-&gt;pid, <span class="string">&quot;xonotic-linux64-sdl&quot;</span>)) == <span class="number">0</span>) &#123;</span><br><span class="line">    sleep_ms(<span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;waiting for xonotic...\n&quot;</span>);</span><br><span class="line">  Game game;</span><br><span class="line">  open_game(&amp;game);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;pid: %d\n&quot;</span>, game.pid);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;xonotic-linux64-sdl module: %lx\n&quot;</span>, game.module);</span><br><span class="line"></span><br><span class="line">  MyPlayer myPlayer;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (readMyPlayer(game, &amp;myPlayer)) &#123;</span><br><span class="line">      manage_input(&amp;game);</span><br><span class="line">      <span class="keyword">if</span> (game.options.health) &#123;</span><br><span class="line">        writeHealth(game, myPlayer, <span class="number">150</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      printPlayer(myPlayer);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;not in arena\n&quot;</span>);</span><br><span class="line">      sleep_ms(<span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    sleep_ms(<span class="number">50</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Keep in mind that this hack works for single player only. Server side software should keep their own health value for each player and as such we can’t change it, any local change will be visual only.</p>
+<h2 id="Modding-and-game-development"><a href="#Modding-and-game-development" class="headerlink" title="Modding and game development"></a>Modding and game development</h2><p>With reverse engineering it is possible to develop complex mods, adding new features to games. For example, San Andreas Multiplayer mod was created by identifying memory structures, intercepting engine functions and building a client&#x2F;server network layer to synchronize state. Richard Burns Rally is kept alive by an active modding community, which reverse engineered the game to understand its file formats to create new tracks and cars and hooked the game engine to improve physics and add new functionalities.</p>
+<p>Games that are fun and support modding or plugins tend to have a good longevity, as players can build new content. Some examples include Assetto Corsa, rFactor 2, Counter-Strike, L4D2, Quake, Doom 3 and many more. Modelling of 3D tracks&#x2F;maps is usually done in game-specific tools like Bob’s Track Editor, 3DSimED3, ksEditor, Hammer Editor, GtkRadiant, with some allowing configuration of bot AI. Depending on the game, it is also possible to create assets in modelling software like <a target="_blank" rel="noopener" href="https://www.blender.org/">Blender</a>, which can then be imported to the game editor (or even directly to the game supported format, if a Blender plugin exists). I’ve seen an impressive <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=f4zxp2IdXQo">video</a> of using photogrammetry software to generate an Assetto Corsa map based on a real city, which if fully done manually would be significantly more time consuming.</p>
+<p>Nowadays, modern game engines like <a target="_blank" rel="noopener" href="https://www.unrealengine.com/">Unreal Engine</a> or the open-source <a target="_blank" rel="noopener" href="https://godotengine.org/">Godot</a> make it easier to develop advanced 3D games, so building from scratch can be an alternative for modding. There is also a healthy collection of open-source FPS and racing games:</p>
+<ul>
+<li>Xonotic</li>
+<li>Red Eclipse</li>
+<li>Unvanquished</li>
+<li>Assault Cube</li>
+<li>Speed Dreams</li>
+<li>Trigger Rally</li>
+<li>Rigs of Rods</li>
+<li>SuperTuxKart</li>
+</ul>
+<p>Developing 2D games is often simpler but they are less immersive, even when using techniques like raycasting and sprite scaling to achieve a 3D illusion. If you are looking for some open-source 2.5D games, check the following:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/StanislavPetrovV/DOOM-style-Game">Doom style game</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/buntine/SwervinMervin">OutRun style game</a></li>
+</ul>
 <h2 id="Closing-thoughts"><a href="#Closing-thoughts" class="headerlink" title="Closing thoughts"></a>Closing thoughts</h2><p>Reverse engineering is hard. I admire the researchers who have to analyze software&#x2F;malware in similar ways. Making complex cheats is also extremely time consuming. For example, we can draw enemies through walls or even automatically aim and shoot against them by reading their coordinates and applying some game&#x2F;engine dependent math, but a lot of study is required.</p>
 <p>The full source code is available on <a target="_blank" rel="noopener" href="https://github.com/ruial/linux-game-hack-example">GitHub</a> and was tested on Ubuntu 16.04 and Xonotic v0.8.2.</p>
 
@@ -223,7 +241,7 @@
     </div>
 
     <div id="toc-footer" style="display:none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-are-game-hacks-made"><span class="toc-number">1.</span> <span class="toc-text">How are game hacks made</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cheat-Engine"><span class="toc-number">2.</span> <span class="toc-text">Cheat Engine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Searching-the-health"><span class="toc-number">2.1.</span> <span class="toc-text">Searching the health</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-scan"><span class="toc-number">2.2.</span> <span class="toc-text">Pointer scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dissect-data-structures"><span class="toc-number">2.3.</span> <span class="toc-text">Dissect data structures</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-number">3.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">4.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-are-game-hacks-made"><span class="toc-number">1.</span> <span class="toc-text">How are game hacks made</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cheat-Engine"><span class="toc-number">2.</span> <span class="toc-text">Cheat Engine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Searching-the-health"><span class="toc-number">2.1.</span> <span class="toc-text">Searching the health</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-scan"><span class="toc-number">2.2.</span> <span class="toc-text">Pointer scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dissect-data-structures"><span class="toc-number">2.3.</span> <span class="toc-text">Dissect data structures</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-number">3.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modding-and-game-development"><span class="toc-number">4.</span> <span class="toc-text">Modding and game development</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">5.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display:none">
@@ -259,7 +277,7 @@
     Copyright &copy;
     
     
-    2023
+    2026
     Rui Almeida
   </div>
   <div class="footer-right">
@@ -311,7 +329,7 @@
 
 
 
-    <script type="text/javascript">var disqus_shortname="briefbytes";!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()</script>
+    <script type="text/javascript">var disqus_shortname="briefbytes";(()=>{var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
 
 
 
