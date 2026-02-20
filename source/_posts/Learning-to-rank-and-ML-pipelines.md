@@ -54,3 +54,8 @@ These articles cover ML pipelines in more detail:
 - https://huyenchip.com/2021/09/13/data-science-infrastructure.html
 - https://ljvmiranda921.github.io/notebook/2021/05/15/navigating-the-mlops-landscape-part-2/
 - https://datatalks.club/blog/mlops-10-minutes.html
+
+
+## The Shift to Agentic RAG and LLM-Based Re-ranking
+
+While classic LTR relied on gradient-boosted trees and manual feature engineering (like BM25 or PageRank), the modern pipeline has shifted toward Retrieval-Augmented Generation (RAG) and Agentic Workflows. Nowadays it is common to index document embeddings in vector databases and use semantic search to find relevant context. Using frameworks like [LangChain](https://github.com/langchain-ai/langchain), it is possible to orchestrate this process and even create custom agents that use a ReAct (Reasoning and Acting) loop to evaluate search results. These agents can for example summarize the top-K results, call specialized tools to validate facts, generate alternative queries, route queries to specific retrieval engines, and use LLMs as high-precision cross-encoders to re-rank documents based on contextual relevance. While the cost for orchestrating these new pipelines is still high, there is no denying that recent developments (more powerful models, longer context, tool calling, better frameworks, higher efficiency through quantization and other techniques) are impressive and with the massive investments being made these technologies will keep improving and are already viable for many production use cases. 

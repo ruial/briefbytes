@@ -162,6 +162,29 @@ int main() {
 
 Keep in mind that this hack works for single player only. Server side software should keep their own health value for each player and as such we can't change it, any local change will be visual only.
 
+## Modding and game development
+
+With reverse engineering it is possible to develop complex mods, adding new features to games. For example, San Andreas Multiplayer mod was created by identifying memory structures, intercepting engine functions and building a client/server network layer to synchronize state. Richard Burns Rally is kept alive by an active modding community, which reverse engineered the game to understand its file formats to create new tracks and cars and hooked the game engine to improve physics and add new functionalities.
+
+Games that are fun and support modding or plugins tend to have a good longevity, as players can build new content. Some examples include Assetto Corsa, rFactor 2, Counter-Strike, L4D2, Quake, Doom 3 and many more. Modelling of 3D tracks/maps is usually done in game-specific tools like Bob's Track Editor, 3DSimED3, ksEditor, Hammer Editor, GtkRadiant, with some allowing configuration of bot AI. Depending on the game, it is also possible to create assets in modelling software like [Blender](https://www.blender.org), which can then be imported to the game editor (or even directly to the game supported format, if a Blender plugin exists). I've seen an impressive [video](https://www.youtube.com/watch?v=f4zxp2IdXQo) of using photogrammetry software to generate an Assetto Corsa map based on a real city, which if fully done manually would be significantly more time consuming.
+
+Nowadays, modern game engines like [Unreal Engine](https://www.unrealengine.com) or the open-source [Godot](https://godotengine.org) make it easier to develop advanced 3D games, so building from scratch can be an alternative for modding. There is also a healthy collection of open-source FPS and racing games:
+
+- Xonotic
+- Red Eclipse
+- Unvanquished
+- Assault Cube
+- Speed Dreams
+- Trigger Rally
+- Rigs of Rods
+- SuperTuxKart
+
+Developing 2D games is often simpler but they are less immersive, even when using techniques like raycasting and sprite scaling to achieve a 3D illusion. If you are looking for some open-source 2.5D games, check the following:
+
+- [Doom style game](https://github.com/StanislavPetrovV/DOOM-style-Game)
+- [OutRun style game](https://github.com/buntine/SwervinMervin)
+
+
 ## Closing thoughts
 
 Reverse engineering is hard. I admire the researchers who have to analyze software/malware in similar ways. Making complex cheats is also extremely time consuming. For example, we can draw enemies through walls or even automatically aim and shoot against them by reading their coordinates and applying some game/engine dependent math, but a lot of study is required.
